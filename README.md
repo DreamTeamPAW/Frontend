@@ -1,0 +1,2 @@
+# Frontend
+BookBox application frontend
