@@ -1,14 +1,15 @@
 import api from './api';
 import { AxiosError } from 'axios';
 
-interface Credentials {
+export interface Credentials {
     email: string;
     password: string;
 }
 
-interface User {
+export interface User {
     id: number;
     email: string;
+    role: 'user' | 'admin';
 }
 
 interface AuthResponse {
