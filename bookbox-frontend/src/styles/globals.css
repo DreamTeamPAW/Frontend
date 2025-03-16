@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-button-color: #685752;
+  --primary-button-hover-color: #8e7670;
+  --secondary-button-color: #ddc8b5;
+  --secondary-button-hover-color: #aa998b;
 }
 
 @theme inline {
