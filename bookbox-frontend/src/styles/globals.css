@@ -4,9 +4,15 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary-button-color: #685752;
-  --primary-button-hover-color: #8e7670;
+  --primary-button-active-color: #473c38;
+  --primary-button-hover-color: #2f2825;
   --secondary-button-color: #ddc8b5;
-  --secondary-button-hover-color: #aa998b;
+  --secondary-button-active-color: #c7a485;
+  --secondary-button-hover-color: #b29478;
+  --tertiary-button-color: #5a6a4e;
+  --tertiary-button-active-color: #3e4936;
+  --tertiary-button-hover-color: #3e4936;
+  
 }
 
 @theme inline {
@@ -22,7 +28,7 @@
     --foreground: #ededed;
   }
 }
-
+X
 body {
   background: var(--background);
   color: var(--foreground);
