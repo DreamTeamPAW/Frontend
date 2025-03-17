@@ -3,6 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  --primary-text-color: #685752;
+  --secondnary-text-color: #8eb486;
+  --contrast-text-color: #ffffff;
+  --disabled-text-color: #cccccc;
+
+  --primary-icon-color: #685752;
+  --disabled-icon-color: #b3b3b3;
+  --text-input-color: #7f7f7f;
+
+  --focused-border-color: #685752;
+  --disabled-border-color: #dfdfdf;
+
+  --primary-shadow-color: #999999;
+  --secondary-shadow-color: #bfbfbf;
 }
 
 @theme inline {
