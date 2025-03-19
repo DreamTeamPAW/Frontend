@@ -1,4 +1,5 @@
 import React from "react";
+import { buttonStyle } from "../../styles/classes"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -6,14 +7,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<ButtonProps> = ({ children, className = "", ...props }) => {
-  return (
-    <button
-      className={`px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+    return (
+      <button className={`${buttonStyle} ${className}`} {...props}>
+          {children}
+      </button>
+    );
 };
 
 export default Button;
