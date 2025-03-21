@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { API_URL } from './constants';
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'http://change.to.base.api.url',
+  baseURL: API_URL,
 });
 
 api.interceptors.response.use(
