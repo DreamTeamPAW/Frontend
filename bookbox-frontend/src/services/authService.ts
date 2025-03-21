@@ -1,6 +1,7 @@
 import api from './api';
 import { AxiosError } from 'axios';
 import { LOGIN_URL, REGISTER_URL, LOGOUT_URL, ME_URL , UserRole} from './constants';
+import { clearToken, setToken } from '@/utils/token';
 
 export interface Credentials {
     email: string;
@@ -17,10 +18,16 @@ interface AuthResponse {
     message: string;
 }
 
+interface LoginResponse {
+    token: string;
+}
+
 export const login = async (credentials: Credentials): Promise<void> => {
     try{
-        const response = await api.post<AuthResponse>(LOGIN_URL, credentials);
-         console.log(response.data.message);
+        const response = await api.post<LoginResponse>(LOGIN_URL, credentials);
+        const token = response.data.token;
+        setToken(token);
+        console.log("Logged in successfully");
     } catch(error){
         console.error("Error logging in: ", error);
         let errorMessage = 'Error logging in';
@@ -48,6 +55,7 @@ export const register = async (credentials: Credentials): Promise<void> => {
 export const logout = async (): Promise<void> => {
     try{
         const response = await api.post<AuthResponse>(LOGOUT_URL);
+        clearToken();
         console.log(response.data.message);
     } catch(error){
         console.error("Error logging out: ", error);
