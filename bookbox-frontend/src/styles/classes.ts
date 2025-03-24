@@ -1,0 +1,1 @@
+export const buttonStyle = "w-lg px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition";
