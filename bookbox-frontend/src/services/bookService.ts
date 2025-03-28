@@ -1,26 +1,11 @@
 import api from './api'
 import { BOOKS_URL } from './constants'
 import { AxiosError } from 'axios';
+import { Book, BookStatus, BookList } from '../types/Book';
 
-export enum BookStatus {
-    UNREAD = "unread",
-    READING = "reading",
-    FINISHED = "finished"
-}
-
-export interface Book {
-    _id: string;
-    userID: number;
-    isbn: string;
-    title: string;
-    author: string;
-    tags: string[];
-    status: BookStatus;
-    dateAdded: Date;
-}
 
 export interface BookCU {
-    userID: number;
+    userID: string;
     isbn: string;
     title: string;
     author: string;
@@ -34,25 +19,12 @@ export interface BookCreateResponse {
     book: BookCU;
 }
 
-export interface BookListPagination {
-    currentPage: number;
-    totalPages: number;
-    totalBooks: number;
-    limit: number;
-}
-
-export interface BookList {
-    books: Book[];
-    pagination: BookListPagination;
-
-}
-
-interface BookListParams {
+export interface BookListParams {
     page: number;
     limit: number;
 }
 
-const buildBookUrl = (id: number) => `${BOOKS_URL}/${id}$`
+const buildBookUrl = (id: string) => `${BOOKS_URL}/${id}`
 
 
 export const getBooks = async (params: BookListParams): Promise<BookList> => {
@@ -83,7 +55,7 @@ export const addBook = async (book: BookCU): Promise<BookCreateResponse> => {
     }
 };
 
-export const getBook = async (bookID: number): Promise<Book> => {
+export const getBook = async (bookID: string): Promise<Book> => {
     try {
         const response = await api.get<Book>(buildBookUrl(bookID));
         return response.data;
@@ -97,7 +69,7 @@ export const getBook = async (bookID: number): Promise<Book> => {
     }
 };
 
-export const deleteBook = async (bookID: number): Promise<void> => {
+export const deleteBook = async (bookID: string): Promise<void> => {
     try {
         await api.delete(buildBookUrl(bookID));
     } catch (error) {
@@ -123,3 +95,4 @@ export const updateBook = async (book: BookCU, id: string): Promise<Book> => {
         throw new Error(errorMessage);
     }
 }
+
