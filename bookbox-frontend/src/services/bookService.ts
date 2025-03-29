@@ -2,6 +2,7 @@ import api from './api'
 import { BOOKS_URL } from './constants'
 import { AxiosError } from 'axios';
 import { Book, BookStatus, BookList } from '../types/Book';
+import { PaginationParams } from '@/types/Pagination';
 
 
 export interface BookCU {
@@ -19,15 +20,10 @@ export interface BookCreateResponse {
     book: BookCU;
 }
 
-export interface BookListParams {
-    page: number;
-    limit: number;
-}
-
 const buildBookUrl = (id: string) => `${BOOKS_URL}/${id}`
 
 
-export const getBooks = async (params: BookListParams): Promise<BookList> => {
+export const getBooks = async (params: PaginationParams): Promise<BookList> => {
     try {
         const response = await api.get<BookList>(BOOKS_URL, { params: params });
         return response.data;

@@ -6,18 +6,18 @@ import {
     deleteBook as deleteBookService,
     updateBook as updateBookService,
     BookCU,
-    BookListParams
 } from '../services/bookService';
 import { Book, BookList } from '../types/Book';
 import { DEFAULT_LIMIT, INITIAL_PAGE } from '@/services/constants';
+import { PaginationParams } from '@/types/Pagination';
 
 
 type BookContextType = {
     books: BookList | null;
-    currentParams: BookListParams;
+    currentParams: PaginationParams;
     error: string | null;
     loading: boolean;
-    fetchBooks: (params: BookListParams) => Promise<void>;
+    fetchBooks: (params: PaginationParams) => Promise<void>;
     addBook: (book: BookCU) => Promise<void>;
     updateBook: (book: BookCU, id: string) => Promise<void>;
     deleteBook: (bookID: string) => Promise<void>;
@@ -29,7 +29,7 @@ const BookContext = createContext<BookContextType | undefined>(undefined);
 export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [books, setBooks] = useState<BookList | null>(null);
-    const [currentParams, setCurrentParams] = useState<BookListParams>({ page: INITIAL_PAGE, limit: DEFAULT_LIMIT });
+    const [currentParams, setCurrentParams] = useState<PaginationParams>({ page: INITIAL_PAGE, limit: DEFAULT_LIMIT });
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -37,13 +37,12 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         fetchBooks(currentParams);
     }, []);
 
-    const fetchBooks = async (params: BookListParams) => {
+    const fetchBooks = async (params: PaginationParams) => {
         try {
             setLoading(true);
             const bookList = await getBooksService(params);
             setBooks(bookList);
             console.log("Books fetched successfully");
-            console.log(bookList);
             setCurrentParams(params);
         } catch (error) {
             setError("Error fetching books");

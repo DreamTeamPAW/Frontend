@@ -3,7 +3,9 @@ export const LOGIN_URL = '/auth/login';
 export const REGISTER_URL = '/auth/register';
 export const LOGOUT_URL = '/auth/logout';
 export const ME_URL = '/auth/me';
+
 export const BOOKS_URL = '/api/books';
+export const USERS_URL = '/api/users';
 
 export const AUTH_TOKEN_KEY = 'authToken';
 

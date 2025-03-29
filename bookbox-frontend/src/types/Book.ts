@@ -1,4 +1,4 @@
-
+import { BookPagination } from "./Pagination";
 
 export enum BookStatus {
 	UNREAD = "unread",
@@ -17,15 +17,8 @@ export interface Book {
 	dateAdded: Date;
 }
 
-export interface BookListPagination {
-	currentPage: number;
-	totalPages: number;
-	totalBooks: number;
-	limit: number;
-}
-
 export interface BookList {
 	books: Book[];
-	pagination: BookListPagination;
+	pagination: BookPagination;
 
 }
