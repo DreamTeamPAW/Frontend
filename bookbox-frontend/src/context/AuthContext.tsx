@@ -52,20 +52,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }
 
-    const handleRegister = async (credentials: Credentials) => {
+    const handleRegister = async (credentials: Credentials): Promise<boolean> => {
         setError(null);
         setLoading(true);
         try {
             await register(credentials);
-            const user = await getUser();
-            setUser(user);
+            setLoading(false);
+            return true;
         } catch (error) {
             setError("Error registering");
             console.error("Error registering: ", error);
-            setUser(null);
-            throw error;
-        } finally {
             setLoading(false);
+            return false;
         }
     }
 
