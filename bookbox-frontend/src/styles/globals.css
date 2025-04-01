@@ -3,6 +3,33 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --primary-button-color: #685752;
+  --primary-button-active-color: #473c38;
+  --primary-button-hover-color: #2f2825;
+  --secondary-button-color: #ddc8b5;
+  --secondary-button-active-color: #c7a485;
+  --secondary-button-hover-color: #b29478;
+  --tertiary-button-color: #5a6a4e;
+  --tertiary-button-active-color: #3e4936;
+  --tertiary-button-hover-color: #3e4936;
+  
+  
+  --primary-text-color: #685752;
+  --secondnary-text-color: #8eb486;
+  --contrast-text-color: #ffffff;
+  --disabled-text-color: #cccccc;
+
+  --primary-icon-color: #685752;
+  --disabled-icon-color: #b3b3b3;
+  --text-input-color: #7f7f7f;
+
+  --focused-border-color: #685752;
+  --disabled-border-color: #dfdfdf;
+
+  --primary-shadow-color: #999999;
+  --secondary-shadow-color: #bfbfbf;
+
 }
 
 @theme inline {
@@ -18,7 +45,7 @@
     --foreground: #ededed;
   }
 }
-
+X
 body {
   background: var(--background);
   color: var(--foreground);
