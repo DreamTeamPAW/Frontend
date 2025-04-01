@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Button from "@/components/00-atoms/Button";
 import InputField from "../components/00-atoms/InputField";
 import { User } from "@phosphor-icons/react/dist/ssr";
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <Button className="bg-[var(--primary-button-color)] hover:bg-[var(--primary-button-hover-color)] active:bg-[var(--primary-button-active-color)]">Log in</Button>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
       <InputField placeholder="Login" icon={<User weight="fill" size={18}/>}/>
         <Image
