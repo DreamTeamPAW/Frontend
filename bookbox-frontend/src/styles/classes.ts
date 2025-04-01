@@ -7,3 +7,4 @@ export const inputFIeldStyle = `w-s py-2 pl-10 pr-4 rounded-xl bg-[var(--contras
                 shadow-md focus:shadow-lg shadow-[var(--primary-shadow-color)] focus:shadow-[var(--secondary-shadow-color)]
                 text-[var(--text-input-color)] focus:text-[var(--primary-text-color)]`;
 
+export const labelStyle = `block text-sm font-medium text-[var(--text-input-color)] mb-2 transition group-focus-within:text-[var(--focused-border-color)]`;
