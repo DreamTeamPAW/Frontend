@@ -30,7 +30,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Change user
 USER nextjs
 # Expose the port that the application listens on.
-EXPOSE 3000
+EXPOSE 3001
 # Run the application.
-ENV HOSTNAME=projektpaw.azurewebsites.net
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3001
 CMD ["node", "server.js"]
