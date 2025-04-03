@@ -1,4 +1,4 @@
-export const API_URL = 'http://change.to.base.api.url';
+export const API_URL = 'https://api-projektpaw.azurewebsites.net';
 export const LOGIN_URL = '/auth/login';
 export const REGISTER_URL = '/auth/register';
 export const LOGOUT_URL = '/auth/logout';
