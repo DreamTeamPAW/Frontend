@@ -12,7 +12,7 @@ interface LoginTemplateProps {
 const LoginTemplate: React.FC<LoginTemplateProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="absolute left-[15%] w-full max-w-md">
+      <div className="absolute left-[10%] w-full max-w-md">
       <TwoLabels
         label1={{
           text: 'Book Box',

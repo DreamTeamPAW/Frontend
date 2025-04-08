@@ -1,13 +1,22 @@
 import React from "react";
 import RegisterTemplate from "../03-templates/RegisterTemplate";
 import RegisterForm from "../02-organisms/RegisterForm";
-import backgroundImage from '../assets/BookBoxLoginBG.png';
+import { backgroundImageLoginPage } from "@/styles/classes";
 
 const RegisterPage: React.FC = () => {
     return (
-        <RegisterTemplate>
-          <RegisterForm />
-        </RegisterTemplate>
+      <div style={backgroundImageLoginPage.backgroundContainer}>
+        <div className="relative h-screen w-screen">
+        <img
+        src="/images/placeholderBG.png"
+        alt="Right Image"
+        className="absolute right-0 top-0 w-[30vw] w-full h-[100vh] object-cover transform scale-x-[-1]"
+      />
+          <RegisterTemplate>
+            <RegisterForm />
+          </RegisterTemplate>
+        </div>
+      </div>
     );
   };
 

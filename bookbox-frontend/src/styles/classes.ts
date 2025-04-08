@@ -14,8 +14,17 @@ export const primaryButtonStyle = "bg-[var(--primary-button-color)] hover:bg-[va
 
 export const secondaryButtonStyle = "bg-[var(--secondary-button-color)] hover:bg-[var(--secondary-button-hover-color)] active:bg-[var(--secondary-button-active-color)]"
 
-export const bookBoxLabelStyle = "font-khmer font-normal text-[60px] leading-[10px] text-[var(--primary-text-color)] text-shadow";
+export const bookBoxLabelStyle = "font-khmer font-normal text-[60px] leading-[60px] text-[var(--primary-text-color)] text-shadow";
 
-export const loginFlavorTextLabelStyle = "font-aksara font-normal text-[24px] leading-[65px] text-[var(--secondnary-text-color)]";
+export const loginFlavorTextLabelStyle = "font-aksara font-normal text-[24px] leading-[32px] text-[var(--secondnary-text-color)]";
 
 export const tertiaryTextLabelStyle = "font-aksara font-normal text-[12px] leading-[20px] text-[var(--tertiary-text-color)]"
+
+export const backgroundImageLoginPage = {
+    backgroundContainer: {
+      backgroundImage: "url('/images/mc-bookshelf.jpg')",
+      backgroundRepeat: "repeat",
+      height: "100vh",
+      width: "100%",
+    },
+  };
