@@ -7,7 +7,7 @@ import { User, Lock } from "@phosphor-icons/react/dist/ssr";
 import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
 import Link from "next/link";
 
-const LoginForm: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -72,4 +72,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
