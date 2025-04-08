@@ -6,6 +6,7 @@ import { backgroundImageLoginPage } from "@/styles/classes";
 const LoginPage: React.FC = () => {
     return (
       <div style={backgroundImageLoginPage.backgroundContainer}>
+        <div className="relative h-screen w-screen">
           <img
             src="/images/placeholderBG.png"
             alt="Left Image"
@@ -15,6 +16,7 @@ const LoginPage: React.FC = () => {
             <LoginForm />
           </LoginTemplate>
         </div>
+      </div>
     );
   };
 
