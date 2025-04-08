@@ -4,12 +4,12 @@ import TwoLabels from "../01-molecules/TwoLabels"
 import { bookBoxLabelStyle, loginFlavorTextLabelStyle, secondaryButtonStyle } from "@/styles/classes";
 import Link from "next/link";
 
-interface LoginTemplateProps {
+interface RegisterTemplateProps {
   children: React.ReactNode; 
 }
 
 
-const LoginTemplate: React.FC<LoginTemplateProps> = ({ children }) => {
+const RegisterTemplate: React.FC<RegisterTemplateProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="absolute left-[65%] w-full max-w-md">
@@ -29,4 +29,4 @@ const LoginTemplate: React.FC<LoginTemplateProps> = ({ children }) => {
   );
 };
 
-export default LoginTemplate;
+export default RegisterTemplate;
