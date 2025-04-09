@@ -8,8 +8,9 @@ const LoginPage: React.FC = () => {
       <div style={backgroundImageLoginPage.backgroundContainer}>
         <div className="relative h-screen w-screen">
           <img
-            src="/images/placeholderBG.png"
+            src="/images/bg1.png"
             alt="Left Image"
+            draggable="false"
             className="absolute left-0 top-0 w-full h-full object-cover"
           />
           <LoginTemplate>
