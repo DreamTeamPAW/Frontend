@@ -2,6 +2,7 @@ import Image from "next/image";
 import Button from "@/components/00-atoms/Button";
 import InputField from "../components/00-atoms/InputField";
 import { User } from "@phosphor-icons/react/dist/ssr";
+import "@/styles/globals.css";
 
 export default function Home() {
   return (
