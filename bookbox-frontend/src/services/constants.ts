@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:3000';
+export const API_URL = 'https://api-projektpaw.azurewebsites.net';
 export const LOGIN_URL = '/api/login';
 export const REGISTER_URL = '/api/register';
 export const LOGOUT_URL = '/api/logout';
