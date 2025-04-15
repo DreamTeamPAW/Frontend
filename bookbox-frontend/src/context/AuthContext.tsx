@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getUser, login, logout, register, User, Credentials } from "../services/authService";
+import { getUser, login, logout, register, LoginCredentials, RegisterCredentials } from "../services/authService";
+import { User } from "@/types/User";
 
 
 interface AuthContextType {
     user: User | null;
-    login: (credentials: Credentials) => Promise<void>;
-    register: (credentials: Credentials) => Promise<void>;
+    login: (credentials: LoginCredentials) => Promise<void>;
+    register: (credentials: RegisterCredentials) => Promise<void>;
     logout: () => Promise<void>;
     loading: boolean;
     error: string | null;
@@ -35,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         fetchUser();
     }, []);
 
-    const handleLogin = async (credentials: Credentials) => {
+    const handleLogin = async (credentials: LoginCredentials) => {
         setError(null);
         setLoading(true);
         try {
@@ -52,19 +53,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }
 
-    const handleRegister = async (credentials: Credentials) => {
+    const handleRegister = async (credentials: RegisterCredentials) => {
         setError(null);
         setLoading(true);
         try {
             await register(credentials);
-            const user = await getUser();
-            setUser(user);
+            setLoading(false);
         } catch (error) {
             setError("Error registering");
             console.error("Error registering: ", error);
-            setUser(null);
-            throw error;
-        } finally {
             setLoading(false);
         }
     }
@@ -85,7 +82,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     return (
-        <AuthContext.Provider value={{ user, login: handleLogin, register: handleRegister, logout: handleLogout, loading, error }}>
+        <AuthContext.Provider value={{
+            user,
+            login: handleLogin,
+            register: handleRegister,
+            logout: handleLogout,
+            loading, error
+        }}>
             {children}
         </AuthContext.Provider>
     );
