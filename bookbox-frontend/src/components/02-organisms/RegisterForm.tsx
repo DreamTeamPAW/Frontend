@@ -9,6 +9,7 @@ import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
 import Link from "next/link";
 import { register } from "@/services/authService"
 
+
 const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -47,6 +48,7 @@ const RegisterForm: React.FC = () => {
       setError(err.message || "An error occurred during registration.");
       setSuccess(null);
     }
+
   };
 
   return (
@@ -92,6 +94,7 @@ const RegisterForm: React.FC = () => {
       />
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
+
         <Link href="/login" className = {`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}
       <Button type="submit" className = {`${primaryButtonStyle} mt-4`}>

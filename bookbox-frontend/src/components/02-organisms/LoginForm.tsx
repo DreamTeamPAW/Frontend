@@ -6,12 +6,15 @@ import Button from "../00-atoms/Button";
 import { User, Lock } from "@phosphor-icons/react/dist/ssr"; 
 import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
 import Link from "next/link";
+
 import { login } from "@/services/authService";
 import { useRouter } from "next/navigation";
+
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -64,6 +67,7 @@ const LoginForm: React.FC = () => {
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
       <Link href="/recovery" className = {`${tertiaryTextLabelStyle} pl-1`}>Forgot password</Link>
+
       {/* Submit Button */}
       <Button type="submit" className = {`${primaryButtonStyle} mt-4`}>
         Log in
