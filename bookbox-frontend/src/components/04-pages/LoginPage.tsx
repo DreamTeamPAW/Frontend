@@ -5,6 +5,7 @@ import LoginForm from "../02-organisms/LoginForm";
 import { backgroundImageLoginPage } from "@/styles/classes";
 
 const LoginPage: React.FC = () => {
+
   const [scale, setScale] = useState(1);
   const [translateX, setTranslateX] = useState(0);
 
@@ -44,5 +45,6 @@ const LoginPage: React.FC = () => {
     </div>
   );
 };
+
 
 export default LoginPage;

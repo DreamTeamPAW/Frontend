@@ -1,24 +1,54 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; 
 import FormField from "../01-molecules/FormField";
 import Button from "../00-atoms/Button";
 import { User, Lock } from "@phosphor-icons/react/dist/ssr"; 
 import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
 import Link from "next/link";
+import { register } from "@/services/authService"
+
 
 const RegisterForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Username:", username);
-    console.log("Password:", password);
-    console.log("Repeat Password:", repeatPassword);
+
+    if (!email || !username || !password || !repeatPassword) {
+      setError("All fields must be filled.");
+      return;
+    }
+
+    if (password !== repeatPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const response = await register({
+        email,
+        username,
+        password,
+      });
+
+      setSuccess("Registration successful! You can now log in.");
+      setError(null);
+
+      router.push("/login");
+    } catch (err: any) {
+      setError(err.message || "An error occurred during registration.");
+      setSuccess(null);
+    }
+
   };
 
   return (
@@ -62,6 +92,8 @@ const RegisterForm: React.FC = () => {
         onChange={(e) => setRepeatPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
       />
+      {error && <p className="text-red-500">{error}</p>}
+      {success && <p className="text-green-500">{success}</p>}
 
         <Link href="/login" className = {`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}
