@@ -31,6 +31,25 @@ const HomepageTemplate: React.FC = () => {
       .finally(() => setLoading(false));
   }, [query, limit, page]);
 
+  useEffect(() => {
+    if (!selected) return; // Only listen when overlay is open
+  
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        setSelected(null);
+      }
+    };
+    
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [selected]);
+  
+  useEffect(() => {
+    document.documentElement.style.overflowY = "scroll";
+    return () => {
+      document.documentElement.style.overflowY = "";
+    }; }, []);
+
   return (
     <div>
       <NavBar />
@@ -94,7 +113,8 @@ const HomepageTemplate: React.FC = () => {
 
       {/* Overlay for Book Details */}
       {selected && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black flex items-center justify-center z-50"
+            style={{ backgroundColor: "rgba(0,0,0,0.6)" }}>
           <div className="bg-white rounded-lg p-8 max-w-md w-full relative">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl"
@@ -104,13 +124,12 @@ const HomepageTemplate: React.FC = () => {
               &times;
             </button>
             <img
-              src={selected.coverUrl || "/placeholder.jpg"}
+              src={selected.coverUrl || "images/placeholder.jpg"}
               alt={selected.title}
               className="w-full h-48 object-cover rounded"
             />
             <h2 className="mt-4 text-xl font-bold">{selected.title}</h2>
             <p className="mt-2 text-gray-700">{selected.author}</p>
-            <p className="mt-2 text-gray-700">{selected.description}</p>
           </div>
         </div>
       )}
