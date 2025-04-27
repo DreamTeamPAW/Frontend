@@ -29,18 +29,18 @@ export const NavBar = () => {
 
   return (
     <nav className={navBarStyle + " relative"}>
-        <Link href="/home" passHref>
-            <Button noDefaultStyle className={imageButtonStyle} aria-label="Home">
-                <img src="/images/Logo.png" alt="Logo" className="h-[72px] w-auto" />
+        <Link href="/home" passHref draggable="false">
+            <Button noDefaultStyle className={imageButtonStyle} aria-label="Home" draggable="false">
+                <img src="/images/Logo.png" alt="Logo" className="h-[72px] w-auto" draggable="false" />
             </Button>
         </Link>   
         <div className={navBarSpacedTextButtons}>
-            <Link href="/home" passHref>
-                <Button noDefaultStyle className={textButtonStyle}>My library</Button>  
+            <Link href="/home" passHref draggable="false">
+                <Button noDefaultStyle className={textButtonStyle} draggable="false">My library</Button>  
             </Link>
-            <Button noDefaultStyle className={textButtonStyle}>Add book</Button>
-            <Link href="/home" passHref>
-                <Button noDefaultStyle className={textButtonStyle}>My account</Button>
+            <Button noDefaultStyle className={textButtonStyle} draggable="false">Add book</Button>
+            <Link href="/home" passHref draggable="false">
+                <Button noDefaultStyle className={textButtonStyle} draggable="false">My account</Button>
             </Link>
         <span ref={hamburgerRef}>
           <HamburgerButton open={cardOpen} onClick={() => setCardOpen((open) => !open)} />
