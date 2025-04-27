@@ -2,10 +2,10 @@ import React from 'react';
 
 const Card = () => {
   return (
-    <div className="w-72 bg-white p-5 shadow-md shadow-purple-200/50 rounded-md">
+    <div className="w-72 bg-white p-5 shadow-md shadow-[0_4px_6px_-1px_var(--primary-button-color)/0.5] rounded-md">
       <ul className="w-full flex flex-col gap-2">
         <li className="flex items-center cursor-pointer w-full whitespace-nowrap">
-          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-purple-100 hover:shadow-inner focus:bg-gradient-to-r from-purple-400 to-purple-600 focus:text-white text-gray-700 transition-all ease-linear">
+          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-[var(--primary-button-color)] hover:shadow-inner focus:bg-gradient-to-r focus:from-[var(--primary-button-color)] focus:to-[var(--primary-button-color)] focus:text-white text-gray-700 transition-all ease-linear">
             <svg stroke="#000000" className="size-6 group-focus:fill-white group-focus:stroke-white" id="dashboard-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000">
               <g strokeWidth={0} id="SVGRepo_bgCarrier" />
               <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />
@@ -16,10 +16,10 @@ const Card = () => {
               </g>
             </svg>
             Dashboard
-          </button>
+            </button>
         </li>
         <li className="flex items-center cursor-pointer w-full whitespace-nowrap">
-          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-purple-100 hover:shadow-inner focus:bg-gradient-to-r from-purple-400 to-purple-600 focus:text-white text-gray-700 transition-all ease-linear">
+          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-[var(--primary-button-color)] hover:shadow-inner focus:bg-gradient-to-r focus:from-[var(--primary-button-color)] focus:to-[var(--primary-button-color)] focus:text-white text-gray-700 transition-all ease-linear">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="size-6">
               <g strokeWidth={0} id="SVGRepo_bgCarrier" />
               <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />
@@ -28,10 +28,10 @@ const Card = () => {
               </g>
             </svg>
             Settings
-          </button>
+            </button>
         </li>
         <li className="flex items-center cursor-pointer w-full whitespace-nowrap">
-          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-purple-100 hover:shadow-inner focus:bg-gradient-to-r from-purple-400 to-purple-600 focus:text-white text-gray-700 transition-all ease-linear">
+          <button className="flex w-full items-center gap-4 p-4 group font-semibold rounded-full bg-cover hover:bg-[var(--primary-button-color)] hover:shadow-inner focus:bg-gradient-to-r focus:from-[var(--primary-button-color)] focus:to-[var(--primary-button-color)] focus:text-white text-gray-700 transition-all ease-linear">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="size-6">
               <g strokeWidth={0} id="SVGRepo_bgCarrier" />
               <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />
