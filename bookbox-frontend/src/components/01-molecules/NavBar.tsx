@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { textButtonStyle, imageButtonStyle, navBarStyle } from "@/styles/classes";
+import { textButtonStyle, imageButtonStyle, navBarStyle, navBarSpacedTextButtons } from "@/styles/classes";
 import Button from "../00-atoms/Button";
 import HamburgerButton from "../00-atoms/HamburgerButton";
 import Card from "../00-atoms/Card";
@@ -34,7 +34,7 @@ export const NavBar = () => {
                 <img src="/images/Logo.png" alt="Logo" className="h-[72px] w-auto" />
             </Button>
         </Link>   
-        <div className="ml-auto flex items-center space-x-40 flex-nowrap">
+        <div className={navBarSpacedTextButtons}>
             <Link href="/home" passHref>
                 <Button noDefaultStyle className={textButtonStyle}>My library</Button>  
             </Link>
