@@ -28,3 +28,6 @@ export const backgroundImageLoginPage = {
       width: "100%",
     },
   };
+
+  
+export const hamburgerButtonStyle = "w-16 h-16 flex flex-col items-center justify-center bg-transparent border-none p-0 space-y-2"
