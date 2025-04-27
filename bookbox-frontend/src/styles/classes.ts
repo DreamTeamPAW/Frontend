@@ -28,3 +28,10 @@ export const backgroundImageLoginPage = {
       width: "100%",
     },
   };
+
+export const navBarStyle = "sticky top-0 z-50 h-20 bg-[#DDC8B5] flex items-center px-6"
+
+export const imageButtonStyle = "bg-transparent p-0 border-none focus:outline-none hover:opacity-80 transition";
+
+export const textButtonStyle = "font-Khmer font-normal text-[20px] leading-[100%] tracking-normal text-center text-[var(--primary-button-color)] px-2 py-1 rounded focus:outline-none focus:underline transition";
+
