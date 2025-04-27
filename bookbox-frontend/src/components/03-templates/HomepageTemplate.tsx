@@ -8,7 +8,7 @@ import { BookPagination, PaginationParams } from "@/types/Pagination";
 import { Pagination } from "antd"; // Ant Design Pagination
 
 const HomepageTemplate: React.FC = () => {
-  const [filter, setFilter] = useState("");
+  const [query, setFilter] = useState("");
   const [limit, setLimit] = useState(15); // limit = pageSize
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<Book[]>([]);
@@ -21,6 +21,7 @@ const HomepageTemplate: React.FC = () => {
     const params: PaginationParams = {
       page,
       limit,
+      query,
     };
     getBooks(params)
       .then((data) => {
@@ -28,7 +29,7 @@ const HomepageTemplate: React.FC = () => {
         setPagination(data.pagination);
       })
       .finally(() => setLoading(false));
-  }, [filter, limit, page]);
+  }, [query, limit, page]);
 
   return (
     <div>
@@ -40,7 +41,7 @@ const HomepageTemplate: React.FC = () => {
         draggable="false"
       />
       <PaginationAndFilter
-        filter={filter}
+        filter={query}
         setFilter={setFilter}
         pageSize={limit}
         setPageSize={setLimit}
@@ -63,7 +64,7 @@ const HomepageTemplate: React.FC = () => {
                 onClick={() => setSelected(book)}
               >
                 <img
-                  src={book.coverUrl || "/placeholder.jpg"}
+                  src={book.coverUrl || "images/placeholder.jpg"}
                   alt={book.title}
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
