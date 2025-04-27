@@ -35,6 +35,8 @@ export const imageButtonStyle = "bg-transparent p-0 border-none focus:outline-no
 
 export const textButtonStyle = "font-Khmer font-normal text-[20px] leading-[100%] tracking-normal text-center text-[var(--primary-button-color)] px-2 py-1 rounded hover:underline focus:outline-none focus:underline transition";
 
+export const primaryTextStyle = "font-aksara font-normal text-[20px] leading-[100%] tracking-[0%]"
+
 export const hamburgerButtonStyle = "w-16 h-16 flex flex-col items-center justify-center bg-transparent border-none p-0 space-y-2"
 
 export const navBarSpacedTextButtons = "ml-auto flex items-center space-x-40 flex-nowrap"
