@@ -1,4 +1,4 @@
-export const API_URL = 'https://api-projektpaw.azurewebsites.net';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001';
 export const LOGIN_URL = '/api/login';
 export const REGISTER_URL = '/api/register';
 export const LOGOUT_URL = '/api/logout';
