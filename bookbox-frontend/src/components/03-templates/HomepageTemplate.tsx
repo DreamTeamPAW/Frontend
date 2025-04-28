@@ -5,11 +5,13 @@ import PaginationAndFilter from "../02-organisms/PaginationAndFilter";
 import { getBooks } from "@/services/bookService";
 import { Book } from "@/types/Book";
 import { BookPagination, PaginationParams } from "@/types/Pagination";
-import { Pagination } from "antd"; // Ant Design Pagination
+import { Pagination } from "antd"; 
+import Label from "../00-atoms/Label";
+import { primaryTextStyle } from "@/styles/classes";
 
 const HomepageTemplate: React.FC = () => {
   const [query, setFilter] = useState("");
-  const [limit, setLimit] = useState(15); // limit = pageSize
+  const [limit, setLimit] = useState(15); 
   const [page, setPage] = useState(1);
   const [books, setBooks] = useState<Book[]>([]);
   const [pagination, setPagination] = useState<BookPagination | null>(null);
@@ -32,7 +34,7 @@ const HomepageTemplate: React.FC = () => {
   }, [query, limit, page]);
 
   useEffect(() => {
-    if (!selected) return; // Only listen when overlay is open
+    if (!selected) return;
   
     const handleEsc = (event) => {
       if (event.key === "Escape") {
@@ -68,33 +70,38 @@ const HomepageTemplate: React.FC = () => {
 
       {/* Book Grid */}
       <div className="p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {loading ? (
-            <div className="col-span-3 text-center">Loading...</div>
-          ) : books.length === 0 ? (
-            <div className="col-span-3 text-center text-gray-500">
-              No books found.
-            </div>
-          ) : (
-            books.map((book) => (
-              <div
-                key={book._id}
-                className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition"
-                onClick={() => setSelected(book)}
-              >
-                <img
-                  src={book.coverUrl || "images/placeholder.jpg"}
-                  alt={book.title}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
-                <div className="p-4">
-                  <h3 className="font-bold text-lg">{book.title}</h3>
-                  <p className="text-gray-500">{book.author}</p>
-                </div>
-              </div>
-            ))
-          )}
+      <div
+  className="grid gap-20 justify-center"
+  style={{
+    gridTemplateColumns: "repeat(3, 250px)",
+  }}
+>
+    {loading ? (
+      <div className="col-span-3 text-center">Loading...</div>
+    ) : books.length === 0 ? (
+      <div className="col-span-3 text-center text-gray-500">
+        No books found.
+      </div>
+    ) : (
+      books.map((book) => (
+        <div>
+        <div
+          key={book._id}
+          className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
+          onClick={() => setSelected(book)}
+        >
+          <img
+            src={book.coverUrl || "images/placeholder.jpg"}
+            alt={book.title}
+            className="w-full h-auto object-cover rounded-t-lg"
+          />          
         </div>
+        <Label className={`${primaryTextStyle} text-center`}>{book.title}</Label>
+        </div>
+
+      ))
+    )}
+  </div>
 
 
         {/* Pagination Controls */}
