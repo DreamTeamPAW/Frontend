@@ -96,7 +96,7 @@ const HomepageTemplate: React.FC = () => {
             className="w-full h-auto object-cover rounded-t-lg"
           />          
         </div>
-        <Label className={`${primaryTextStyle} text-center`}>{book.title}</Label>
+        <Label className={`${primaryTextStyle} text-center mt-3`}>{book.title}</Label>
         </div>
 
       ))
