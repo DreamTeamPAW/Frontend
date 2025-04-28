@@ -9,6 +9,18 @@ import { Pagination } from "antd";
 import Label from "../00-atoms/Label";
 import { primaryTextStyle } from "@/styles/classes";
 
+const statusStyles = {
+  unread: "bg-purple-400 text-black",
+  reading:"bg-green-500 text-white",
+  finished: "bg-blue-400 text-black",
+  /*
+  reading: "bg-green-500 text-white",
+  completed: "bg-blue-400 text-black",
+  dropped: "bg-red-500 text-white",
+  planning: "bg-purple-400 text-black",
+  */
+};
+
 const HomepageTemplate: React.FC = () => {
   const [query, setFilter] = useState("");
   const [limit, setLimit] = useState(15); 
@@ -36,7 +48,7 @@ const HomepageTemplate: React.FC = () => {
   useEffect(() => {
     if (!selected) return;
   
-    const handleEsc = (event) => {
+    const handleEsc = (event: { key: string; }) => {
       if (event.key === "Escape") {
         setSelected(null);
       }
@@ -69,13 +81,13 @@ const HomepageTemplate: React.FC = () => {
       />
 
       {/* Book Grid */}
-      <div className="p-8">
-      <div
-  className="grid gap-20 justify-center"
-  style={{
+<div className="p-8">
+  <div
+    className="grid gap-20 justify-center"
+    style={{
     gridTemplateColumns: "repeat(3, 250px)",
   }}
->
+  >
     {loading ? (
       <div className="col-span-3 text-center">Loading...</div>
     ) : books.length === 0 ? (
@@ -87,9 +99,22 @@ const HomepageTemplate: React.FC = () => {
         <div>
         <div
           key={book._id}
-          className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
+          className="relative cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
           onClick={() => setSelected(book)}
         >
+          {book.status && (
+            <span
+            className={`
+                absolute top-0 right-3 w-6 h-16
+                ${statusStyles[book.status] || "bg-gray-400"}
+                rounded-b
+                z-20
+            `}
+            style={{
+                clipPath: "polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)"
+            }}
+            />
+          )}
           <img
             src={book.coverUrl || "images/placeholder.jpg"}
             alt={book.title}
