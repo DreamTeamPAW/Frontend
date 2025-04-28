@@ -100,4 +100,4 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           images: pawprojekt2025/pawprojekt2025:Frontend-4
-          app-name: api-projektpaw
+          app-name: projektpaw
