@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../00-atoms/Button";
-import TwoLabels from "../01-molecules/TwoLabels"
+import Button from "@components/00-atoms/Button";
+import TwoLabels from "@components/01-molecules/TwoLabels"
 import { bookBoxLabelStyle, loginFlavorTextLabelStyle, secondaryButtonStyle } from "@/styles/classes";
 import Link from "next/link";
 

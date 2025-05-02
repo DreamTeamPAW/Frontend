@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from "react";
-import FormField from "../01-molecules/FormField";
+import FormField from "@components/01-molecules/FormField";
 import { InputNumber } from 'antd';
 import { Funnel } from "@phosphor-icons/react/dist/icons/Funnel";
-import Label from "../00-atoms/Label";
+import Label from "@components/00-atoms/Label";
 import { primaryTextStyle } from "@/styles/classes";
 
 interface PaginationAndFilterProps {
