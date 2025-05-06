@@ -1,13 +1,20 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { textButtonStyle, imageButtonStyle, navBarStyle } from "@/styles/classes";
-import Button from "../00-atoms/Button";
-import HamburgerButton from "../00-atoms/HamburgerButton";
-import Card from "../00-atoms/Card";
+import {
+  textButtonStyle,
+  imageButtonStyle,
+  navBarStyle,
+  navBarSpacedTextButtons,
+} from "@/styles/classes";
+import Button from "@components/00-atoms/Button";
+import HamburgerButton from "@components/00-atoms/HamburgerButton";
+import Card from "@components/00-atoms/Card";
 import Link from "next/link";
+import AddBookOverlay from "@components/01-molecules/AddBookOverlay";
 
 export const NavBar = () => {
   const [cardOpen, setCardOpen] = useState(false);
+  const [addBookOpen, setAddBookOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
@@ -29,21 +36,45 @@ export const NavBar = () => {
 
   return (
     <nav className={navBarStyle + " relative"}>
-        <Link href="/home" passHref>
-            <Button noDefaultStyle className={imageButtonStyle} aria-label="Home">
-                <img src="/images/Logo.png" alt="Logo" className="h-[72px] w-auto" />
-            </Button>
-        </Link>   
-        <div className="ml-auto flex items-center space-x-40 flex-nowrap">
-            <Link href="/home" passHref>
-                <Button noDefaultStyle className={textButtonStyle}>My library</Button>  
-            </Link>
-            <Button noDefaultStyle className={textButtonStyle}>Add book</Button>
-            <Link href="/home" passHref>
-                <Button noDefaultStyle className={textButtonStyle}>My account</Button>
-            </Link>
+      <Link href="/home" passHref draggable="false">
+        <Button
+          noDefaultStyle
+          className={imageButtonStyle}
+          aria-label="Home"
+          draggable="false"
+        >
+          <img
+            src="/images/Logo.png"
+            alt="Logo"
+            className="h-[72px] w-auto"
+            draggable="false"
+          />
+        </Button>
+      </Link>
+      <div className={navBarSpacedTextButtons}>
+        <Link href="/home" passHref draggable="false">
+          <Button noDefaultStyle className={textButtonStyle} draggable="false">
+            My library
+          </Button>
+        </Link>
+        <Button
+          noDefaultStyle
+          className={textButtonStyle}
+          draggable="false"
+          onClick={() => setAddBookOpen(true)}
+        >
+          Add book
+        </Button>
+        <Link href="/home" passHref draggable="false">
+          <Button noDefaultStyle className={textButtonStyle} draggable="false">
+            My account
+          </Button>
+        </Link>
         <span ref={hamburgerRef}>
-          <HamburgerButton open={cardOpen} onClick={() => setCardOpen((open) => !open)} />
+          <HamburgerButton
+            open={cardOpen}
+            onClick={() => setCardOpen((open) => !open)}
+          />
         </span>
       </div>
       {/* Card Dropdown */}
@@ -56,6 +87,9 @@ export const NavBar = () => {
           <Card />
         </div>
       )}
+
+      {/* Add Book Overlay as a molecule */}
+      <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} />
     </nav>
   );
 };

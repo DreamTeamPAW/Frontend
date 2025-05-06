@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import LoginTemplate from "../03-templates/LoginTemplate";
-import LoginForm from "../02-organisms/LoginForm";
+import LoginTemplate from "@components/03-templates/LoginTemplate";
+import LoginForm from "@components/02-organisms/LoginForm";
 import { backgroundImageLoginPage } from "@/styles/classes";
 
 const ZOOM_THRESHOLD = 0.5;

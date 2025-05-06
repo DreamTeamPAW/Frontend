@@ -1,8 +1,7 @@
 "use client";
-
 import React, { useState } from "react";
-import FormField from "../01-molecules/FormField";
-import Button from "../00-atoms/Button";
+import FormField from "@components/01-molecules/FormField";
+import Button from "@components/00-atoms/Button";
 import { User, Lock } from "@phosphor-icons/react/dist/ssr"; 
 import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
 import Link from "next/link";
