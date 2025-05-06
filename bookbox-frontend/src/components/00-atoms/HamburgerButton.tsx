@@ -1,3 +1,4 @@
+import { hamburgerButtonStyle } from '@/styles/classes';
 import React from 'react';
 
 interface HamburgerButtonProps {
@@ -11,7 +12,8 @@ const HamburgerButton: React.FC<HamburgerButtonProps> = ({ open, onClick }) => (
     aria-label="Toggle menu"
     aria-expanded={open}
     onClick={onClick}
-    className="w-16 h-16 flex flex-col items-center justify-center bg-transparent border-none p-0 space-y-2"
+
+    className={hamburgerButtonStyle}
   >
     <div className={`w-[60%] h-[4px] rounded-sm transition-all duration-300 origin-left
       ${open ? 'rotate-[41deg]  bg-[#685752]' : 'bg-[#685752] translate-y-0'}`} />
