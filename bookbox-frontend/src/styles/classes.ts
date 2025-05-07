@@ -14,6 +14,8 @@ export const primaryButtonStyle = "bg-[var(--primary-button-color)] hover:bg-[va
 
 export const secondaryButtonStyle = "bg-[var(--secondary-button-color)] hover:bg-[var(--secondary-button-hover-color)] active:bg-[var(--secondary-button-active-color)]"
 
+export const tertiaryButtonStyle = "bg-[var(--tertiary-button-color)] hover:bg-[var(--tertiary-button-hover-color)] active:bg-[var(--tertiary-button-active-color)]"
+
 export const bookBoxLabelStyle = "font-khmer font-normal text-[60px] leading-[60px] text-[var(--primary-text-color)] text-shadow";
 
 export const loginFlavorTextLabelStyle = "font-aksara font-normal text-[24px] leading-[32px] text-[var(--secondnary-text-color)]";
@@ -40,3 +42,10 @@ export const primaryTextStyle = "font-aksara font-normal text-[20px] leading-[10
 export const hamburgerButtonStyle = "w-16 h-16 flex flex-col items-center justify-center bg-transparent border-none p-0 space-y-2"
 
 export const navBarSpacedTextButtons = "ml-auto flex items-center space-x-40 flex-nowrap"
+
+export const bookInfoRowPrimaryTextStyle = "text-[var(--primary-text-color)] text-shadow-lg/20 text-xl"
+export const bookInfoRowSecondaryTextStyle = "text-[var(--contrast-text-color)] text-shadow-lg/20 text-xl"
+
+export const bookDetailsOverlayWindowStyle = "fixed inset-0 bg-black flex items-center justify-center z-50 bg-black/60"
+export const bookDetailsOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
+export const bookDeatilsOverlayCloseBtnStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"

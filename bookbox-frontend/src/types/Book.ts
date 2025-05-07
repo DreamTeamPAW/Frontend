@@ -1,9 +1,9 @@
 import { BookPagination } from "./Pagination";
 
 export enum BookStatus {
-	UNREAD = "unread",
-	READING = "reading",
-	FINISHED = "finished"
+	UNREAD = "Not read",
+	READING = "Reading",
+	FINISHED = "Finished"
 }
 
 export interface Book {
