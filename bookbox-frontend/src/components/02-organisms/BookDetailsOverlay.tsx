@@ -36,10 +36,10 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
             </div>
 
             <div className="mt-auto">
-              <Button className = {`${primaryButtonStyle} mt-12`}>
+              <Button className = {`${primaryButtonStyle} mt-12 relative z-10`}>
                 Edit Book
               </Button>
-              <Button className = {`${tertiaryButtonStyle} mt-4`}>
+              <Button className = {`${tertiaryButtonStyle} mt-4 relative z-10`}>
                 Remove Book
               </Button>
             </div>
@@ -47,7 +47,7 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
         </div>
         <img
           src="/images/Booknav.png"
-          className="h-15 w-full bg-repeat-x absolute left-0 bottom-0"
+          className="h-15 w-full bg-repeat-x absolute left-0 bottom-0 z-0"
           draggable="false"/>
       </div>
     </div>
