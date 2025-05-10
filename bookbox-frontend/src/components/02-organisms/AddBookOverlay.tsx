@@ -1,9 +1,11 @@
+'use client';
 import React, { useEffect, useRef } from "react";
+import { bookOverlayWindowStyle, bookOverlayStyle, bookOverlayCloseButtonStyle } from "@/styles/classes";
 
 interface AddBookOverlayProps {
   open: boolean;
   onClose: () => void;
-  children?: React.ReactNode; 
+  children?: React.ReactNode;
 }
 
 const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
@@ -13,7 +15,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
 }) => {
   const popupRef = useRef<HTMLDivElement>(null);
 
-  {/* Close on Escape key */}
+  {/* Close on Escape key */ }
   useEffect(() => {
     if (!open) return;
     function handleKeyDown(event: KeyboardEvent) {
@@ -25,7 +27,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open, onClose]);
 
- {/* Close on outside click */}
+  {/* Close on outside click */ }
   useEffect(() => {
     if (!open) return;
     function handlePointerDown(event: PointerEvent) {
@@ -43,23 +45,22 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
   if (!open) return null;
 
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center z-50"
-      style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
-    >
-      <div
-        ref={popupRef}
-        className="bg-white rounded-lg p-8 max-w-md w-full relative"
-      >
+    <div className={`${bookOverlayWindowStyle}`} >
+      <div className={`${bookOverlayStyle}`}>
         <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl"
+          className={`${bookOverlayCloseButtonStyle}`}
           onClick={onClose}
           aria-label="Close"
         >
           &times;
         </button>
         <h2 className="text-xl font-bold mb-4">Add a Book</h2>
-        {children /*add book form*/}
+          {children}
+        <img
+          src="/images/Booknav.png"
+          className="h-15 w-full bg-repeat-x absolute left-0 bottom-0 z-0"
+          draggable="false" 
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import InputField from "../00-atoms/InputField";
+import IconInputField from "../00-atoms/IconInputField";
 
 interface FormFieldProps {
   label?: string;
@@ -21,7 +21,7 @@ const FormField: React.FC<FormFieldProps> = ({
   return (
     <div className="space-y-2">
       <label className="block text-sm font-medium text-gray-700">{label}</label>
-      <InputField
+      <IconInputField
         type={type}
         placeholder={placeholder}
         value={value}

@@ -9,6 +9,16 @@ export const inputFIeldStyle = `w-lg py-2 pl-10 pr-4 rounded-xl bg-[var(--contra
                 shadow-md focus:shadow-lg shadow-[var(--primary-shadow-color)] focus:shadow-[var(--secondary-shadow-color)]
                 text-[var(--text-input-color)] focus:text-[var(--primary-text-color)]`;
 
+export const inputFieldStyleNoIcon = `py-2 pl-2 pr-4 rounded-xl bg-[var(--contrast-text-color)] transition focus:outline-none
+                border-1 border-[var(--disabled-border-color)] focus:border-[var(--focused-border-color)]
+                shadow-md focus:shadow-lg shadow-[var(--primary-shadow-color)] focus:shadow-[var(--secondary-shadow-color)]
+                text-[var(--text-input-color)] focus:text-[var(--primary-text-color)]`;
+
+export const dropdownFieldStyle = `py-2 pl-2 pr-4 rounded-xl bg-[var(--contrast-text-color)] transition focus:outline-none
+                border-1 border-[var(--disabled-border-color)] focus:border-[var(--focused-border-color)]
+                shadow-md focus:shadow-lg shadow-[var(--primary-shadow-color)] focus:shadow-[var(--secondary-shadow-color)]
+                text-[var(--text-input-color)] focus:text-[var(--primary-text-color)]`;
+
 
 export const primaryButtonStyle = "bg-[var(--primary-button-color)] hover:bg-[var(--primary-button-hover-color)] active:bg-[var(--primary-button-active-color)]"
 
@@ -23,13 +33,13 @@ export const loginFlavorTextLabelStyle = "font-aksara font-normal text-[24px] le
 export const tertiaryTextLabelStyle = "font-aksara font-normal text-[12px] leading-[20px] text-[var(--tertiary-text-color)]"
 
 export const backgroundImageLoginPage = {
-    backgroundContainer: {
-      backgroundImage: "url('/images/mc-bookshelf.jpg')",
-      backgroundRepeat: "repeat",
-      height: "100vh",
-      width: "100%",
-    },
-  };
+  backgroundContainer: {
+    backgroundImage: "url('/images/mc-bookshelf.jpg')",
+    backgroundRepeat: "repeat",
+    height: "100vh",
+    width: "100%",
+  },
+};
 
 export const navBarStyle = "sticky top-0 z-50 h-20 bg-[#DDC8B5] flex items-center px-6"
 
@@ -45,7 +55,8 @@ export const navBarSpacedTextButtons = "ml-auto flex items-center space-x-40 fle
 
 export const bookInfoRowPrimaryTextStyle = "text-[var(--primary-text-color)] text-shadow-lg/20 text-xl"
 export const bookInfoRowSecondaryTextStyle = "text-[var(--contrast-text-color)] text-shadow-lg/20 text-xl"
+export const bookStatusDropdownTextStyle = "text-[var(--primary-text-color)] text-xl"
 
-export const bookDetailsOverlayWindowStyle = "fixed inset-0 bg-black flex items-center justify-center z-50 bg-black/60"
-export const bookDetailsOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
-export const bookDeatilsOverlayCloseBtnStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"
+export const bookOverlayWindowStyle = "fixed inset-0 bg-black flex items-center justify-center z-50 bg-black/60"
+export const bookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
+export const bookOverlayCloseButtonStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"
