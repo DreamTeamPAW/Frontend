@@ -1,40 +1,45 @@
-import React, { useRef, useState } from 'react';
-import { bookInfoRowPrimaryTextStyle, bookInfoRowSecondaryTextStyle, primaryButtonStyle } from "@/styles/classes";
+import {
+  bookInfoRowSecondaryTextStyle,
+  tertiaryButtonStyle,
+  filePickerContainerStyle,
+  filePickerTextStyle,
+  filePickerButtonStyle,
+} from "@/styles/classes";
 
 interface FilePickerProps {
   pickedFile: File | null;
-  fileRef?: React.RefObject<HTMLInputElement|null>;
+  fileRef?: React.RefObject<HTMLInputElement | null>;
   onFileChange: (
     event: React.ChangeEvent<HTMLInputElement>
-    ) => void;
+  ) => void;
 }
 
-const FilePicker = ({ pickedFile, onFileChange, fileRef}: FilePickerProps) => {
+const FilePicker = ({ pickedFile, onFileChange, fileRef }: FilePickerProps) => {
 
   return (
-    <div className="flex justify-between w-full items-center gap-4">
-      {/* Hidden file input */}
-      <input
-        type="file"
-        ref={fileRef}
-        onChange={onFileChange}
-        className="hidden"
-        accept="image/*"
-      />
-      
-      {/* Display file name */}
-        <span className={`${bookInfoRowPrimaryTextStyle} w-[50%] overflow-hidden text-ellipsis whitespace-nowrap`}>
-            {pickedFile ? pickedFile.name : "No file chosen"}
+    <div className="pt-2">
+      <div className={`${filePickerContainerStyle}`}>
+        <input
+          type="file"
+          ref={fileRef}
+          onChange={onFileChange}
+          className="hidden"
+          accept="image/*"
+        />
+
+        <span className={`${filePickerTextStyle}`}>
+          {pickedFile ? pickedFile.name : "No file chosen"}
         </span>
-      {/* Custom styled button */}
-      <button
-        type="button"
-        onClick={() => fileRef?.current?.click()}
-        className={`${primaryButtonStyle} ${bookInfoRowSecondaryTextStyle} h-10 rounded-full w-[50%]`}
-      >
-        Choose File
-      </button>
-    </div>
+        {/* Custom styled button */}
+        <button
+          type="button"
+          onClick={() => fileRef?.current?.click()}
+          className={`${filePickerButtonStyle}`}
+        >
+          Choose File
+        </button>
+      </div>
+    </div >
   );
 };
 

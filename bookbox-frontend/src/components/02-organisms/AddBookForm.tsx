@@ -1,7 +1,7 @@
 import React from 'react';
 import InputFieldRow from '../00-atoms/InputFieldRow';
 import Button from '../00-atoms/Button';
-import { primaryButtonStyle } from '@/styles/classes';
+import { addBookFormButtonStyle, addBookFormImageStyle, addBookFormStyle, primaryButtonStyle } from '@/styles/classes';
 import DropdownInputRow from '../00-atoms/DropdownInputRow';
 import { BookStatus } from '@/types/Book';
 import FilePicker from '../00-atoms/FilePicker';
@@ -31,35 +31,33 @@ const AddBookForm: React.FC = () => {
   };
 
   return (
-    <div className="flex h-full"> 
-      <div className="h-full mr-6 rounded-lg"> 
-        <img
-          src={coverUrl || "/images/placeholder.jpg"}
-          alt="Book Cover"
-          className="h-full w-auto object-contain rounded-lg"
-          draggable="false"
-        />
-      </div>
+    <div className="flex">
+      <img
+        src={coverUrl || "/images/placeholder.jpg"}
+        alt="Book Cover"
+        className={`${addBookFormImageStyle}`}
+        draggable="false"
+      />
 
-      <form 
+      <form
         onSubmit={handleSubmit}
-        className="flex-col justify-between h-full"
+        className={`${addBookFormStyle}`}
       >
-          <InputFieldRow value={title} setValue={setTitle} label="Title" />
-          <InputFieldRow value={author} setValue={setAuthor} label="Author" />
-          <DropdownInputRow
-            label="Status"
-            enumObj={BookStatus}
-            selectedOption={status}
-            setSelectedOption={setStatus}
-          />
-          <FilePicker
-            pickedFile={file}
-            fileRef={fileRef}
-            onFileChange={handleFileChange}/>
-          <Button type="submit" className={`${primaryButtonStyle} mt-4 self-start`}>
-            Add Book
-          </Button>
+        <InputFieldRow value={title} setValue={setTitle} label="Title" />
+        <InputFieldRow value={author} setValue={setAuthor} label="Author" />
+        <DropdownInputRow
+          label="Status"
+          enumObj={BookStatus}
+          selectedOption={status}
+          setSelectedOption={setStatus}
+        />
+        <FilePicker
+          pickedFile={file}
+          fileRef={fileRef}
+          onFileChange={handleFileChange} />
+        <Button type="submit" className={`${addBookFormButtonStyle}`}>
+          Add Book
+        </Button>
       </form>
     </div>
   );

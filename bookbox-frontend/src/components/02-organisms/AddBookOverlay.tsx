@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from "react";
-import { bookOverlayWindowStyle, bookOverlayStyle, bookOverlayCloseButtonStyle } from "@/styles/classes";
+import { bookOverlayWindowStyle, bookOverlayStyle, bookOverlayCloseButtonStyle, addBookOverlayHeaderStyle, addBookOverlayImageStyle, addBookOverlayStyle } from "@/styles/classes";
 
 interface AddBookOverlayProps {
   open: boolean;
@@ -46,7 +46,7 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
 
   return (
     <div className={`${bookOverlayWindowStyle}`} >
-      <div className={`${bookOverlayStyle}`}>
+      <div className={`${addBookOverlayStyle}`}>
         <button
           className={`${bookOverlayCloseButtonStyle}`}
           onClick={onClose}
@@ -54,12 +54,12 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
         >
           &times;
         </button>
-        <h2 className="text-xl font-bold mb-4">Add a Book</h2>
-          {children}
+        <h2 className={`${addBookOverlayHeaderStyle}`}>Add a Book</h2>
+        {children}
         <img
           src="/images/Booknav.png"
-          className="h-15 w-full bg-repeat-x absolute left-0 bottom-0 z-0"
-          draggable="false" 
+          className={`${addBookOverlayImageStyle}`}
+          draggable="false"
         />
       </div>
     </div>

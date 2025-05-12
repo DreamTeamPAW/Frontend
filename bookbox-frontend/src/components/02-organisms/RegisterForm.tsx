@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import FormField from "@components/01-molecules/FormField";
 import Button from "@components/00-atoms/Button";
-import { User, Lock } from "@phosphor-icons/react/dist/ssr"; 
-import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
+import { User, Lock } from "@phosphor-icons/react/dist/ssr";
+import { primaryButtonStyle, tertiaryTextLabelStyle } from "@/styles/classes";
 import Link from "next/link";
 import { register } from "@/services/authService"
 
@@ -95,9 +95,9 @@ const RegisterForm: React.FC = () => {
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
 
-        <Link href="/login" className = {`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
+      <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}
-      <Button type="submit" className = {`${primaryButtonStyle} mt-4`}>
+      <Button type="submit" className={`${primaryButtonStyle} mt-4 w-full`}>
         Sign in
       </Button>
     </form>

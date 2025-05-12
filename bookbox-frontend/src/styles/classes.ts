@@ -1,4 +1,4 @@
-export const buttonStyle = "w-lg px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition";
+export const buttonStyle = " px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition";
 
 export const labelStyle = `block text-sm font-medium text-[var(--text-input-color)] mb-2 transition group-focus-within:text-[var(--focused-border-color)]`;
 
@@ -33,12 +33,12 @@ export const loginFlavorTextLabelStyle = "font-aksara font-normal text-[24px] le
 export const tertiaryTextLabelStyle = "font-aksara font-normal text-[12px] leading-[20px] text-[var(--tertiary-text-color)]"
 
 export const backgroundImageLoginPage = {
-  backgroundContainer: {
-    backgroundImage: "url('/images/mc-bookshelf.jpg')",
-    backgroundRepeat: "repeat",
-    height: "100vh",
-    width: "100%",
-  },
+                backgroundContainer: {
+                                backgroundImage: "url('/images/mc-bookshelf.jpg')",
+                                backgroundRepeat: "repeat",
+                                height: "100vh",
+                                width: "100%",
+                },
 };
 
 export const navBarStyle = "sticky top-0 z-50 h-20 bg-[#DDC8B5] flex items-center px-6"
@@ -60,3 +60,28 @@ export const bookStatusDropdownTextStyle = "text-[var(--primary-text-color)] tex
 export const bookOverlayWindowStyle = "fixed inset-0 bg-black flex items-center justify-center z-50 bg-black/60"
 export const bookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
 export const bookOverlayCloseButtonStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"
+
+
+// Add book overlay styles
+
+//File picker styles
+export const filePickerContainerStyle = "flex justify-between items-center gap-4 bg-white rounded-3xl py-1 pr-1 pl-4 max-w-[500px] shadow-lg"
+export const filePickerTextStyle = "text-[var(--primary-text-color)] overflow-hidden text-ellipsis whitespace-nowrap max-w-[65%] text-lg"
+export const filePickerButtonStyle = `${tertiaryButtonStyle} ${bookInfoRowSecondaryTextStyle} h-10 rounded-full w-[35%]`
+
+//Dropdown row styles
+export const dropdownRowContainerStyle = "flex justify-between items-center mb-2"
+export const dropdownStyle = `${dropdownFieldStyle} ${bookStatusDropdownTextStyle} w-[40%] appearance-none`
+
+//Input field row styles
+export const inputFieldRowContainerStyle = "flex justify-between mb-2"
+
+//Add book form styles
+export const addBookFormImageStyle = "h-full mr-6 max-h-[280px] max-w-[250px] rounded-lg"
+export const addBookFormButtonStyle = `${primaryButtonStyle} mt-4 self-start w-full`
+export const addBookFormStyle = "flex-col -between h-full w-[500px]"
+
+//Add book overlay styles
+export const addBookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-4xl relative pb-22 overflow-hidden"
+export const addBookOverlayImageStyle = "h-15 w-full bg-repeat-x absolute left-0 bottom-0 z-0"
+export const addBookOverlayHeaderStyle = "text-xl font-bold mb-4"

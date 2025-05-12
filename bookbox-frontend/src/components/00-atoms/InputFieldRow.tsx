@@ -1,5 +1,9 @@
 import React from "react";
-import { inputFieldStyleNoIcon, bookInfoRowPrimaryTextStyle } from "@/styles/classes";
+import {
+    inputFieldStyleNoIcon,
+    bookInfoRowPrimaryTextStyle,
+    inputFieldRowContainerStyle
+} from "@/styles/classes";
 import InputField from "./InputField";
 
 interface InputFieldRowProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,14 +13,14 @@ interface InputFieldRowProps extends React.InputHTMLAttributes<HTMLInputElement>
 }
 
 const InputFieldRow: React.FC<InputFieldRowProps> = ({ label, value, setValue }) => (
-    <div className="flex justify-between w-full mb-2">
-        <label className={`${bookInfoRowPrimaryTextStyle} w-[50%]`}>{label}</label>
+    <div className={`${inputFieldRowContainerStyle}`}>
+        <label className={`${bookInfoRowPrimaryTextStyle}`}>{label}</label>
         <InputField
             type="text"
             value={value}
             label={label}
             onChange={(e) => setValue && setValue(e.target.value)}
-            className = {`${inputFieldStyleNoIcon} ${bookInfoRowPrimaryTextStyle} w-[50%]`}
+            className={`${inputFieldStyleNoIcon} ${bookInfoRowPrimaryTextStyle}`}
         />
     </div>
 );
