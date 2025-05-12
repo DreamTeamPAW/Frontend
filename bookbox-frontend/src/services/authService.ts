@@ -71,7 +71,7 @@ export const logout = async (): Promise<void> => {
 export const getUser = async (): Promise<User> => {
     try {
         const response = await api.get<User>(ME_URL);
-        return response.data;
+        return response.data.user;
     } catch (error) {
         console.error("Error fetching user: ", error);
         let errorMessage = 'Error fetching user';

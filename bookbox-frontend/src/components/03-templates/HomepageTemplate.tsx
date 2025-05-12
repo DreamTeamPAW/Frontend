@@ -7,6 +7,7 @@ import { Book } from "@/types/Book";
 import { BookPagination } from "@/types/Pagination";
 import Label from "@components/00-atoms/Label";
 import { primaryTextStyle } from "@/styles/classes";
+import { getUser } from "@/services/authService";
 
 interface HomepageTemplateProps {
   books: Book[];
@@ -18,6 +19,7 @@ interface HomepageTemplateProps {
   setLimit: (n: number) => void;
   page: number;
   setPage: (n: number) => void;
+  userId: string;
 }
 
 const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
@@ -30,8 +32,15 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
   setLimit,
   page,
   setPage,
+  userId,
 }) => {
   const [selected, setSelected] = useState<Book | null>(null);
+
+  useEffect(() => {
+    if (userId !== null) {
+      console.log("User ID:", userId);
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (!selected) return;
@@ -63,6 +72,7 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
         setFilter={setFilter}
         pageSize={limit}
         setPageSize={setLimit}
+        userId={userId}
       />
 
       {/* Book Grid + Pagination */}
