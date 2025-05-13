@@ -1,68 +1,62 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import NavBar from "../01-molecules/NavBar";
-import PaginationAndFilter from "../02-organisms/PaginationAndFilter";
-import { getBooks } from "@/services/bookService";
+import React, { useState, useEffect } from "react";
+import NavBar from "@components/01-molecules/NavBar";
+import PaginationAndFilter from "@components/02-organisms/PaginationAndFilter";
+import BookGridWithPagination from "@components/02-organisms/BookGridWithPagination";
+import BookDetailsOverlay from "@components/02-organisms/BookDetailsOverlay"; 
 import { Book } from "@/types/Book";
-import { BookPagination, PaginationParams } from "@/types/Pagination";
-import { Pagination } from "antd"; 
-import Label from "../00-atoms/Label";
+import { BookPagination } from "@/types/Pagination";
+import Label from "@components/00-atoms/Label";
 import { primaryTextStyle } from "@/styles/classes";
+import { getUser } from "@/services/authService";
 
-const statusStyles = {
-  unread: "bg-purple-400 text-black",
-  reading:"bg-green-500 text-white",
-  finished: "bg-blue-400 text-black",
-  /*
-  reading: "bg-green-500 text-white",
-  completed: "bg-blue-400 text-black",
-  dropped: "bg-red-500 text-white",
-  planning: "bg-purple-400 text-black",
-  */
-};
+interface HomepageTemplateProps {
+  books: Book[];
+  pagination: BookPagination | null;
+  loading: boolean;
+  query: string;
+  setFilter: (q: string) => void;
+  limit: number;
+  setLimit: (n: number) => void;
+  page: number;
+  setPage: (n: number) => void;
+  userId: string;
+}
 
-const HomepageTemplate: React.FC = () => {
-  const [query, setFilter] = useState("");
-  const [limit, setLimit] = useState(15); 
-  const [page, setPage] = useState(1);
-  const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<BookPagination | null>(null);
-  const [loading, setLoading] = useState(false);
+const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
+  books,
+  pagination,
+  loading,
+  query,
+  setFilter,
+  limit,
+  setLimit,
+  page,
+  setPage,
+  userId,
+}) => {
   const [selected, setSelected] = useState<Book | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    const params: PaginationParams = {
-      page,
-      limit,
-      query,
-    };
-    getBooks(params)
-      .then((data) => {
-        setBooks(data.books);
-        setPagination(data.pagination);
-      })
-      .finally(() => setLoading(false));
-  }, [query, limit, page]);
+    if (userId !== null) {
+      console.log("User ID:", userId);
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (!selected) return;
-  
-    const handleEsc = (event: { key: string; }) => {
-      if (event.key === "Escape") {
-        setSelected(null);
-      }
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelected(null);
     };
-    
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, [selected]);
-  
+
   useEffect(() => {
     document.documentElement.style.overflowY = "scroll";
     return () => {
       document.documentElement.style.overflowY = "";
-    }; }, []);
+    };
+  }, []);
 
   return (
     <div>
@@ -78,92 +72,21 @@ const HomepageTemplate: React.FC = () => {
         setFilter={setFilter}
         pageSize={limit}
         setPageSize={setLimit}
+        userId={userId}
       />
 
-      {/* Book Grid */}
-<div className="p-8">
-  <div
-    className="grid gap-20 justify-center"
-    style={{
-    gridTemplateColumns: "repeat(3, 250px)",
-  }}
-  >
-    {loading ? (
-      <div className="col-span-3 text-center">Loading...</div>
-    ) : books.length === 0 ? (
-      <div className="col-span-3 text-center text-gray-500">
-        No books found.
-      </div>
-    ) : (
-      books.map((book) => (
-        <div>
-        <div
-          key={book._id}
-          className="relative cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
-          onClick={() => setSelected(book)}
-        >
-          {book.status && (
-            <span
-            className={`
-                absolute top-0 right-3 w-6 h-16
-                ${statusStyles[book.status] || "bg-gray-400"}
-                rounded-b
-                z-20
-            `}
-            style={{
-                clipPath: "polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)"
-            }}
-            />
-          )}
-          <img
-            src={book.coverUrl || "images/placeholder.jpg"}
-            alt={book.title}
-            className="w-full h-auto object-cover rounded-t-lg"
-          />          
-        </div>
-        <Label className={`${primaryTextStyle} text-center mt-3`}>{book.title}</Label>
-        </div>
-
-      ))
-    )}
-  </div>
-
-
-        {/* Pagination Controls */}
-        {pagination && pagination.totalPages > 1 && (
-          <div className="flex justify-center mt-8">
-            <Pagination
-              current={pagination.currentPage}
-              total={pagination.totalBooks}
-              pageSize={pagination.limit}
-              onChange={(newPage) => setPage(newPage)}
-              showSizeChanger={false}
-            />
-          </div>
-        )}
-      </div>
+      {/* Book Grid + Pagination */}
+      <BookGridWithPagination
+        books={books}
+        loading={loading}
+        pagination={pagination}
+        setPage={setPage}
+        setSelected={setSelected}
+      />
 
       {/* Overlay for Book Details */}
       {selected && (
-        <div className="fixed inset-0 bg-black flex items-center justify-center z-50"
-            style={{ backgroundColor: "rgba(0,0,0,0.6)" }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full relative">
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl"
-              onClick={() => setSelected(null)}
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <img
-              src={selected.coverUrl || "images/placeholder.jpg"}
-              alt={selected.title}
-              className="w-full h-48 object-cover rounded"
-            />
-            <h2 className="mt-4 text-xl font-bold">{selected.title}</h2>
-            <p className="mt-2 text-gray-700">{selected.author}</p>
-          </div>
-        </div>
+        <BookDetailsOverlay book={selected} onClose={() => setSelected(null)} />
       )}
     </div>
   );

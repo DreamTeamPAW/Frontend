@@ -12,6 +12,7 @@ const HamburgerButton: React.FC<HamburgerButtonProps> = ({ open, onClick }) => (
     aria-label="Toggle menu"
     aria-expanded={open}
     onClick={onClick}
+
     className={hamburgerButtonStyle}
   >
     <div className={`w-[60%] h-[4px] rounded-sm transition-all duration-300 origin-left
