@@ -1,4 +1,4 @@
-export const buttonStyle = " px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition";
+export const buttonStyle = "w-lg px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition";
 
 export const labelStyle = `block text-sm font-medium text-[var(--text-input-color)] mb-2 transition group-focus-within:text-[var(--focused-border-color)]`;
 

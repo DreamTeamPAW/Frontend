@@ -32,23 +32,30 @@ const BookGridWithPagination: React.FC<Props> = ({
           No books found.
         </div>
       ) : (
-        books.map((book) => (
-          <div key={book._id}>
-            <div
-              className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
-              onClick={() => setSelected(book)}
-            >
-              <img
-                src={book.coverUrl || "images/placeholder.jpg"}
-                alt={book.title}
-                className="w-full h-auto object-cover rounded-t-lg"
-              />
+        books.map((book) => {
+          console.log("Book object:", book); // <-- Debug output
+          return (
+            <div key={book._id}>
+              <div
+                className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
+                onClick={() => setSelected(book)}
+              >
+                <img
+                  src={
+                      book.cover && book.cover.startsWith("data:image/")
+                        ? book.cover
+                        : "images/placeholder.jpg"
+                      }
+                  alt={book.title}
+                  className="w-full h-auto object-cover rounded-t-lg"
+                />
+              </div>
+              <Label className={`${primaryTextStyle} text-center mt-3 truncate w-[250px]`}>
+                {book.title}
+              </Label>
             </div>
-            <Label className={`${primaryTextStyle} text-center mt-3`}>
-              {book.title}
-            </Label>
-          </div>
-        ))
+          );
+        })
       )}
     </div>
     {pagination && pagination.totalPages > 1 && (
