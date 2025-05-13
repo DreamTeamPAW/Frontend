@@ -7,10 +7,9 @@ import { PaginationParams } from '@/types/Pagination';
 
 export interface BookCU {
     userID: string;
-    isbn: string;
     title: string;
     author: string;
-    tags: string[];
+    cover: string;
     status: BookStatus;
     dateAdded: Date;
 }
