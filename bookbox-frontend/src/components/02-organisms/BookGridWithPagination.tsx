@@ -1,9 +1,9 @@
 import React from "react";
-import { Book } from "@/types/Book";
+import { Book, BookStatusColors } from "@/types/Book";
 import { BookPagination } from "@/types/Pagination";
 import { Pagination } from "antd";
 import Label from "@components/00-atoms/Label";
-import { primaryTextStyle } from "@/styles/classes";
+import { paginationBookElementStyle, primaryTextStyle } from "@/styles/classes";
 
 interface Props {
   books: Book[];
@@ -33,11 +33,14 @@ const BookGridWithPagination: React.FC<Props> = ({
         </div>
       ) : (
         books.map((book) => {
-          console.log("Book object:", book); // <-- Debug output
+          //console.log("Book object:", book); 
           return (
             <div key={book._id}>
               <div
-                className="cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px]"
+                className={paginationBookElementStyle}
+                style={{
+                  borderColor: BookStatusColors[book.status.toUpperCase() as keyof typeof BookStatusColors] || "#d1d5db", // fallback to gray-300
+                }}
                 onClick={() => setSelected(book)}
               >
                 <img

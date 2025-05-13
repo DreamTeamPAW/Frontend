@@ -53,6 +53,7 @@ export const hamburgerButtonStyle = "w-16 h-16 flex flex-col items-center justif
 
 export const navBarSpacedTextButtons = "ml-auto flex items-center space-x-40 flex-nowrap"
 
+// Book overlay styles
 export const bookInfoRowPrimaryTextStyle = "text-[var(--primary-text-color)] text-shadow-lg/20 text-xl"
 export const bookInfoRowSecondaryTextStyle = "text-[var(--contrast-text-color)] text-shadow-lg/20 text-xl"
 export const bookStatusDropdownTextStyle = "text-[var(--primary-text-color)] text-xl"
@@ -61,6 +62,8 @@ export const bookOverlayWindowStyle = "fixed inset-0 bg-black flex items-center 
 export const bookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
 export const bookOverlayCloseButtonStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"
 
+// Pagination styles
+export const paginationBookElementStyle = "cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px] border-3"
 
 // Add book overlay styles
 
