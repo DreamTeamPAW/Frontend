@@ -11,6 +11,7 @@ interface PaginationAndFilterProps {
   setFilter: (value: string) => void;
   pageSize: number;
   setPageSize: (value: number) => void;
+  userId: string;
 }
 
 const PaginationAndFilter: React.FC<PaginationAndFilterProps> = ({

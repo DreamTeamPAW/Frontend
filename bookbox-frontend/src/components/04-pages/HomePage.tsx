@@ -4,6 +4,7 @@ import HomepageTemplate from "@/components/03-templates/HomepageTemplate";
 import { getBooks } from "@/services/bookService";
 import { Book } from "@/types/Book";
 import { BookPagination, PaginationParams } from "@/types/Pagination";
+import { getUser } from "@/services/authService";
 
 const HomePage: React.FC = () => {
   const [query, setFilter] = useState("");
@@ -12,17 +13,38 @@ const HomePage: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [pagination, setPagination] = useState<BookPagination | null>(null);
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userResponse = await getUser();
+        console.log("User response:", userResponse);
+        console.log("User object:", userResponse);
+        console.log("User ID:", userResponse._id);
+        setUserId(userResponse._id);
+      } catch (error) {
+        // Optionally handle error (e.g., show a message)
+        console.error(error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+
+    if (!userId) return;
+
     setLoading(true);
-    const params: PaginationParams = { page, limit, query };
+    const params: PaginationParams = { page, limit, query, userId };
     getBooks(params)
       .then((data) => {
         setBooks(data.books);
         setPagination(data.pagination);
       })
       .finally(() => setLoading(false));
-  }, [query, limit, page]);
+  }, [query, limit, page, userId]);
 
   return (
     <HomepageTemplate
@@ -35,6 +57,7 @@ const HomePage: React.FC = () => {
       setLimit={setLimit}
       page={page}
       setPage={setPage}
+      userId={userId}
     />
   );
 };
