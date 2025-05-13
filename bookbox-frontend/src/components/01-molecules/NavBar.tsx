@@ -10,7 +10,8 @@ import Button from "@components/00-atoms/Button";
 import HamburgerButton from "@components/00-atoms/HamburgerButton";
 import Card from "@components/00-atoms/Card";
 import Link from "next/link";
-import AddBookOverlay from "@components/01-molecules/AddBookOverlay";
+import AddBookOverlay from "@/components/02-organisms/AddBookOverlay";
+import AddBookForm from "../02-organisms/AddBookForm";
 
 export const NavBar = () => {
   const [cardOpen, setCardOpen] = useState(false);
@@ -89,7 +90,9 @@ export const NavBar = () => {
       )}
 
       {/* Add Book Overlay as a molecule */}
-      <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} />
+      <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >
+        <AddBookForm />
+      </AddBookOverlay>
     </nav>
   );
 };
