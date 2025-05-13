@@ -20,6 +20,7 @@ const HomePage: React.FC = () => {
       try {
         const userResponse = await getUser();
         setUserId(userResponse._id);
+        console.log("UserId: ", userResponse);
       } catch (error) {
         // Optionally handle error (e.g., show a message)
         console.error(error);
@@ -32,7 +33,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
 
     if (!userId) return;
-
+    console.log("UserId: ", userId);
     setLoading(true);
     const params: PaginationParams = { page, limit, query, userId };
     getBooks(params)
