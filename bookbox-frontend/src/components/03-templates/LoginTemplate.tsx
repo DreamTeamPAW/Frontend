@@ -25,7 +25,7 @@ const LoginTemplate: React.FC<LoginTemplateProps> = ({ children }) => {
       />
         {children}
         <Link href="/register">
-            <Button type="submit" className= {`${secondaryButtonStyle} mt-4`}>
+            <Button type="submit" className= {`${secondaryButtonStyle} mt-4 w-lg`}>
             Sign in
             </Button>
         </Link>

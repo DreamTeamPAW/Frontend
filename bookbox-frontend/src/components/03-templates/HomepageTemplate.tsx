@@ -36,11 +36,6 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
 }) => {
   const [selected, setSelected] = useState<Book | null>(null);
 
-  useEffect(() => {
-    if (userId !== null) {
-      console.log("User ID:", userId);
-    }
-  }, [userId]);
 
   useEffect(() => {
     if (!selected) return;

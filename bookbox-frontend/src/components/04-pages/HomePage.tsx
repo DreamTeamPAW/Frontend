@@ -19,9 +19,6 @@ const HomePage: React.FC = () => {
     const fetchUser = async () => {
       try {
         const userResponse = await getUser();
-        console.log("User response:", userResponse);
-        console.log("User object:", userResponse);
-        console.log("User ID:", userResponse._id);
         setUserId(userResponse._id);
       } catch (error) {
         // Optionally handle error (e.g., show a message)

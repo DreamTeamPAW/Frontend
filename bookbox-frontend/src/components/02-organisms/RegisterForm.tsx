@@ -97,7 +97,7 @@ const RegisterForm: React.FC = () => {
 
       <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}
-      <Button type="submit" className={`${primaryButtonStyle} mt-4 w-full`}>
+      <Button type="submit" className={`${primaryButtonStyle} mt-4 w-lg`}>
         Sign in
       </Button>
     </form>
