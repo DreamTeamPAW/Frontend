@@ -20,6 +20,7 @@ interface HomepageTemplateProps {
   page: number;
   setPage: (n: number) => void;
   userId: string;
+  onBookUpdated: () => void;
 }
 
 const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
@@ -33,10 +34,12 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
   page,
   setPage,
   userId,
+  onBookUpdated,
 }) => {
   const [selected, setSelected] = useState<Book | null>(null);
 
 
+  
   useEffect(() => {
     if (!selected) return;
     const handleEsc = (event: KeyboardEvent) => {
@@ -77,6 +80,7 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
         pagination={pagination}
         setPage={setPage}
         setSelected={setSelected}
+        onBookUpdated={onBookUpdated}
       />
 
       {/* Overlay for Book Details */}

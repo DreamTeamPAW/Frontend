@@ -1,9 +1,11 @@
 import React from "react";
-import { Book, BookStatusColors } from "@/types/Book";
+import { Book, BookStatus, BookStatusColors } from "@/types/Book";
 import { BookPagination } from "@/types/Pagination";
 import { Pagination } from "antd";
 import Label from "@components/00-atoms/Label";
 import { paginationBookElementStyle, primaryTextStyle } from "@/styles/classes";
+import StatusCard from "@/components/01-molecules/StatusCard";
+import { updateBook } from "@/services/bookService";
 
 interface Props {
   books: Book[];
@@ -11,6 +13,7 @@ interface Props {
   pagination: BookPagination | null;
   setPage: (n: number) => void;
   setSelected: (b: Book) => void;
+  onBookUpdated: () => void;
 }
 
 const BookGridWithPagination: React.FC<Props> = ({
@@ -19,6 +22,7 @@ const BookGridWithPagination: React.FC<Props> = ({
   pagination,
   setPage,
   setSelected,
+  onBookUpdated,
 }) => (
   <div className="p-8">
     <div
@@ -33,9 +37,8 @@ const BookGridWithPagination: React.FC<Props> = ({
         </div>
       ) : (
         books.map((book) => {
-          //console.log("Book object:", book); 
           return (
-            <div key={book._id}>
+            <div key={book._id} className="relative">
               <div
                 className={paginationBookElementStyle}
                 style={{
@@ -51,6 +54,20 @@ const BookGridWithPagination: React.FC<Props> = ({
                       }
                   alt={book.title}
                   className="w-full h-auto object-cover rounded-t-lg"
+                />
+                {/* StatusCard in top-right */}
+                <StatusCard
+                  currentStatus={book.status}
+                  statusColors={BookStatusColors}
+                  statuses={Object.keys(BookStatusColors)}
+                  onChange={async (newStatus) => {
+                    // update logic
+                    book.status = newStatus.toLowerCase();
+                    await updateBook(book,book._id);
+                    if (onBookUpdated) {
+                      onBookUpdated(); 
+                    }
+                  }}
                 />
               </div>
               <Label className={`${primaryTextStyle} text-center mt-3 truncate w-[250px]`}>
