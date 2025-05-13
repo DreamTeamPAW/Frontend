@@ -68,7 +68,7 @@ const LoginForm: React.FC = () => {
       <Link href="/recovery" className = {`${tertiaryTextLabelStyle} pl-1`}>Forgot password</Link>
 
       {/* Submit Button */}
-      <Button type="submit" className = {`${primaryButtonStyle} mt-4`}>
+      <Button type="submit" className = {`${primaryButtonStyle} mt-4 w-lg`}>
         Log in
       </Button>
     </form>

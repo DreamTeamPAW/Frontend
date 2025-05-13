@@ -14,17 +14,17 @@ const HomePage: React.FC = () => {
   const [pagination, setPagination] = useState<BookPagination | null>(null);
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState("");
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
+
+  
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const userResponse = await getUser();
-        console.log("User response:", userResponse);
-        console.log("User object:", userResponse);
-        console.log("User ID:", userResponse._id);
         setUserId(userResponse._id);
+        console.log("UserId: ", userResponse);
       } catch (error) {
-        // Optionally handle error (e.g., show a message)
         console.error(error);
       }
     };
@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
 
     if (!userId) return;
-
+    console.log("UserId: ", userId);
     setLoading(true);
     const params: PaginationParams = { page, limit, query, userId };
     getBooks(params)
@@ -44,7 +44,9 @@ const HomePage: React.FC = () => {
         setPagination(data.pagination);
       })
       .finally(() => setLoading(false));
-  }, [query, limit, page, userId]);
+  }, [query, limit, page, userId, refetchTrigger]);
+
+  const refetchBooks = () => setRefetchTrigger((n) => n + 1);
 
   return (
     <HomepageTemplate
@@ -58,6 +60,7 @@ const HomePage: React.FC = () => {
       page={page}
       setPage={setPage}
       userId={userId}
+      onBookUpdated={refetchBooks}
     />
   );
 };

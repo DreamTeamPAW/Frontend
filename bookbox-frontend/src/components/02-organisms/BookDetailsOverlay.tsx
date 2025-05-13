@@ -23,7 +23,11 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
       </button>
       <div className="flex gap-6">
         <img
-          src={book.coverUrl || "images/placeholder.jpg"}
+          src={
+                      book.cover && book.cover.startsWith("data:image/")
+                        ? book.cover
+                        : "images/placeholder.jpg"
+                      }
           alt={book.title}
           className="w-full h-auto object-cover rounded"
         />
