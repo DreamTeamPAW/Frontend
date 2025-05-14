@@ -64,6 +64,7 @@ export const bookOverlayCloseButtonStyle = "text-gray-500 hover:text-black text-
 
 export const bookOverlayDeletePopupStyle1 = "fixed inset-0 flex items-center justify-center bg-opacity-1 z-50"
 export const bookOverlayDeletePopupStyle2 = "bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center"
+
 // Pagination styles
 export const paginationBookElementStyle = "cursor-pointer bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col w-[250px] border-3"
 
