@@ -85,7 +85,7 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
 
       {/* Overlay for Book Details */}
       {selected && (
-        <BookDetailsOverlay book={selected} onClose={() => setSelected(null)} />
+        <BookDetailsOverlay onBookDeleted={onBookUpdated} book={selected} onClose={() => setSelected(null)} />
       )}
     </div>
   );
