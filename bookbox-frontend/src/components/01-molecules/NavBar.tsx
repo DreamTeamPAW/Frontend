@@ -19,7 +19,6 @@ interface NavBarProps {
 
 
 export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
-
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
   
@@ -28,7 +27,6 @@ export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
       await logout();
       router.push("/login");
     } catch (error) {
-
       console.error("Logout failed:", error);
     }
   };
