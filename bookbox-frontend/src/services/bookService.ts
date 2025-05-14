@@ -7,10 +7,9 @@ import { PaginationParams } from '@/types/Pagination';
 
 export interface BookCU {
     userID: string;
-    isbn: string;
     title: string;
     author: string;
-    tags: string[];
+    cover: string;
     status: BookStatus;
     dateAdded: Date;
 }
@@ -80,7 +79,7 @@ export const deleteBook = async (bookID: string): Promise<void> => {
 
 export const updateBook = async (book: BookCU, id: string): Promise<Book> => {
     try {
-        const response = await api.put<Book>(BOOKS_URL, book, { params: { id: id } });
+        const response = await api.put<Book>(`${BOOKS_URL}/${id}`,book);
         return response.data;
     } catch (error) {
         console.error("Error updating book: ", error);

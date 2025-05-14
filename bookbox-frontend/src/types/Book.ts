@@ -6,13 +6,18 @@ export enum BookStatus {
 	FINISHED = "Finished"
 }
 
+export enum BookStatusColors {
+	UNREAD = "purple",
+	READING = "blue",
+	FINISHED = "green"
+}
+
 export interface Book {
 	_id: string;
 	userID: string;
-	isbn: string;
 	title: string;
 	author: string;
-	tags: string[];
+	cover: string;
 	status: BookStatus;
 	dateAdded: Date;
 }

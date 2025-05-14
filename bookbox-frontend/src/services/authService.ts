@@ -55,9 +55,9 @@ export const register = async (credentials: RegisterCredentials): Promise<void> 
 
 export const logout = async (): Promise<void> => {
     try {
-        const response = await api.post<AuthResponse>(LOGOUT_URL);
+        //const response = await api.post<AuthResponse>(LOGOUT_URL);
         clearToken();
-        console.log(response.data.message);
+        //console.log(response.data.message);
     } catch (error) {
         console.error("Error logging out: ", error);
         let errorMessage = 'Error logging out';

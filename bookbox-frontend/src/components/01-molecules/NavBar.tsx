@@ -7,33 +7,25 @@ import {
   navBarSpacedTextButtons,
 } from "@/styles/classes";
 import Button from "@components/00-atoms/Button";
-import HamburgerButton from "@components/00-atoms/HamburgerButton";
-import Card from "@components/00-atoms/Card";
 import Link from "next/link";
 import AddBookOverlay from "@/components/02-organisms/AddBookOverlay";
 import AddBookForm from "../02-organisms/AddBookForm";
+import { logout } from "@/services/authService";
+import { useRouter } from "next/navigation";
 
 export const NavBar = () => {
-  const [cardOpen, setCardOpen] = useState(false);
   const [addBookOpen, setAddBookOpen] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!cardOpen) return;
-    function handlePointerDown(event: PointerEvent) {
-      if (
-        cardRef.current &&
-        !cardRef.current.contains(event.target as Node) &&
-        hamburgerRef.current &&
-        !hamburgerRef.current.contains(event.target as Node)
-      ) {
-        setCardOpen(false);
-      }
+  const router = useRouter();
+  
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/login");
+    } catch (error) {
+      // Optionally handle error (e.g., show a toast)
+      console.error("Logout failed:", error);
     }
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => document.removeEventListener("pointerdown", handlePointerDown);
-  }, [cardOpen]);
+  };
 
   return (
     <nav className={navBarStyle + " relative"}>
@@ -71,23 +63,11 @@ export const NavBar = () => {
             My account
           </Button>
         </Link>
-        <span ref={hamburgerRef}>
-          <HamburgerButton
-            open={cardOpen}
-            onClick={() => setCardOpen((open) => !open)}
-          />
-        </span>
+        <Button noDefaultStyle className={textButtonStyle} draggable="false" onClick={handleLogout}>
+            Logout
+        </Button>
       </div>
-      {/* Card Dropdown */}
-      {cardOpen && (
-        <div
-          ref={cardRef}
-          className="absolute right-0 mt-2"
-          style={{ top: "100%" }}
-        >
-          <Card />
-        </div>
-      )}
+      
 
       {/* Add Book Overlay as a molecule */}
       <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >

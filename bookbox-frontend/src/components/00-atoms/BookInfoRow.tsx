@@ -9,7 +9,7 @@ interface BookInfoRowProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const BookInfoRow: React.FC<BookInfoRowProps> = ({label, value}) => (
     <div className="flex justify-between">
         <span className={`${bookInfoRowPrimaryTextStyle}`}>{label}:</span>
-        <span className={`${bookInfoRowSecondaryTextStyle}`}>{value}</span>
+        <span className={`${bookInfoRowSecondaryTextStyle} break-all`}>{value}</span>
     </div>
 );
 
