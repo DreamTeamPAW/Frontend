@@ -13,7 +13,12 @@ import AddBookForm from "../02-organisms/AddBookForm";
 import { logout } from "@/services/authService";
 import { useRouter } from "next/navigation";
 
-export const NavBar = () => {
+interface NavBarProps {
+  onBookUpdated?: () => void;
+}
+
+
+export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
   
@@ -22,7 +27,6 @@ export const NavBar = () => {
       await logout();
       router.push("/login");
     } catch (error) {
-      // Optionally handle error (e.g., show a toast)
       console.error("Logout failed:", error);
     }
   };
@@ -71,7 +75,7 @@ export const NavBar = () => {
 
       {/* Add Book Overlay as a molecule */}
       <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >
-        <AddBookForm />
+        <AddBookForm onBookUpdated={onBookUpdated}/>
       </AddBookOverlay>
     </nav>
   );

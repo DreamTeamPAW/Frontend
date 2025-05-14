@@ -58,7 +58,7 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
 
   return (
     <div>
-      <NavBar />
+      <NavBar onBookUpdated={onBookUpdated}/>
       <img
         src="/images/Booknav.png"
         alt="Logo"
