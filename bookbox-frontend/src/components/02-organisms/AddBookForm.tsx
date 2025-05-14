@@ -9,10 +9,10 @@ import { addBook } from '@/services/bookService';
 import { getUser } from '@/services/authService';
 
 interface AddBookFormProps {
-  onBookAdded?: () => void;
+  onBookUpdated?: () => void;
 }
 
-const AddBookForm: React.FC<AddBookFormProps> = ({ onBookAdded }) => {
+const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
   const [status, setStatus] = React.useState(BookStatus.UNREAD);
@@ -75,7 +75,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onBookAdded }) => {
         if (fileRef.current) fileRef.current.value = "";
         setSuccessMessage("Book added successfully!"); 
         setTimeout(() => setSuccessMessage(""), 3000);
-        onBookAdded();
+        onBookUpdated();
       } catch (error) {
         console.error("Failed to add book:", error);
       }
