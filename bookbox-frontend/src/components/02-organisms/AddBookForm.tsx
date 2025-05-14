@@ -75,7 +75,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
         if (fileRef.current) fileRef.current.value = "";
         setSuccessMessage("Book added successfully!"); 
         setTimeout(() => setSuccessMessage(""), 3000);
-        onBookUpdated();
+        if(onBookUpdated) onBookUpdated();
       } catch (error) {
         console.error("Failed to add book:", error);
       }
