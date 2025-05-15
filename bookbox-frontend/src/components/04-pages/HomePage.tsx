@@ -5,6 +5,7 @@ import { getBooks } from "@/services/bookService";
 import { Book } from "@/types/Book";
 import { BookPagination, PaginationParams } from "@/types/Pagination";
 import { getUser } from "@/services/authService";
+import { useAutoDismissAlerts } from "../hooks/useAutoDismissAlerts";
 
 const HomePage: React.FC = () => {
   const [query, setFilter] = useState("");
@@ -15,8 +16,6 @@ const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState("");
   const [refetchTrigger, setRefetchTrigger] = useState(0);
-
-  
 
   useEffect(() => {
     const fetchUser = async () => {

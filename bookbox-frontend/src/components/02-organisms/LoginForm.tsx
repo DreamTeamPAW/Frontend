@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { login } from "@/services/authService";
 import { useRouter } from "next/navigation";
+import { useAutoDismissAlerts } from "@components/hooks/useAutoDismissAlerts";
 
 
 const LoginForm: React.FC = () => {
@@ -16,6 +17,9 @@ const LoginForm: React.FC = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  //Alert dismissal
+  const [alerts, setAlerts] = useAutoDismissAlerts(20000);
 
   const router = useRouter();
 
@@ -32,7 +36,7 @@ const LoginForm: React.FC = () => {
 
       setSuccess("Login successful! Redirecting...");
       setError(null);
-
+      
       router.push("/home");
 
     } catch (err: any) {

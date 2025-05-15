@@ -1,4 +1,3 @@
-// alertsConfig.ts
 export type AlertType = "success" | "info" | "warning" | "error";
 
 export const ALERT_TYPES: AlertType[] = [
