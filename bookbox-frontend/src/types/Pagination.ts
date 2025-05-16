@@ -18,3 +18,8 @@ export interface PaginationParams {
 	query: string;
 	userId?: string;
 }
+
+export interface UserPaginationParams {
+	page: number;
+	limit: number;
+}

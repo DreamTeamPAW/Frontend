@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   textButtonStyle,
   imageButtonStyle,
@@ -14,14 +14,13 @@ import { logout } from "@/services/authService";
 import { useRouter } from "next/navigation";
 
 interface NavBarProps {
-  onBookUpdated?: () => void;
 }
 
 
-export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
+export const NavBar: React.FC<NavBarProps> = () => {
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
-  
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -68,14 +67,14 @@ export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
           </Button>
         </Link>
         <Button noDefaultStyle className={textButtonStyle} draggable="false" onClick={handleLogout}>
-            Logout
+          Logout
         </Button>
       </div>
-      
+
 
       {/* Add Book Overlay as a molecule */}
       <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >
-        <AddBookForm onBookUpdated={onBookUpdated}/>
+        <AddBookForm />
       </AddBookOverlay>
     </nav>
   );

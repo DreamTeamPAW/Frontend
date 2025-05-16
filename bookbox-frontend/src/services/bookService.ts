@@ -6,12 +6,12 @@ import { PaginationParams } from '@/types/Pagination';
 
 
 export interface BookCU {
-    userID: string;
+    userId: string;
     title: string;
     author: string;
     cover: string;
-    status: BookStatus;
-    dateAdded: Date;
+    status: string;
+    dateAdded: string;
 }
 
 export interface BookCreateResponse {
@@ -79,7 +79,7 @@ export const deleteBook = async (bookID: string): Promise<void> => {
 
 export const updateBook = async (book: BookCU, id: string): Promise<Book> => {
     try {
-        const response = await api.put<Book>(`${BOOKS_URL}/${id}`,book);
+        const response = await api.put<Book>(`${BOOKS_URL}/${id}`, book);
         return response.data;
     } catch (error) {
         console.error("Error updating book: ", error);

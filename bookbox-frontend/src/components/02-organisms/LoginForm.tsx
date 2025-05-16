@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import FormField from "@components/01-molecules/FormField";
 import Button from "@components/00-atoms/Button";
-import { User, Lock } from "@phosphor-icons/react/dist/ssr"; 
-import { primaryButtonStyle, tertiaryTextLabelStyle} from "@/styles/classes";
+import { User, Lock } from "@phosphor-icons/react/dist/ssr";
+import { primaryButtonStyle, tertiaryTextLabelStyle } from "@/styles/classes";
 import Link from "next/link";
 
 import { login } from "@/services/authService";
@@ -65,10 +65,10 @@ const LoginForm: React.FC = () => {
       />
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
-      <Link href="/recovery" className = {`${tertiaryTextLabelStyle} pl-1`}>Forgot password</Link>
+      <Link href="/recovery" className={`${tertiaryTextLabelStyle} pl-1`}>Forgot password</Link>
 
       {/* Submit Button */}
-      <Button type="submit" className = {`${primaryButtonStyle} mt-4 w-lg`}>
+      <Button type="submit" className={`${primaryButtonStyle} mt-4 w-lg`}>
         Log in
       </Button>
     </form>

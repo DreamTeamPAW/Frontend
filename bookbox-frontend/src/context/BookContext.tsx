@@ -1,3 +1,4 @@
+'use client';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import {
     getBooks as getBooksService,
@@ -22,6 +23,7 @@ type BookContextType = {
     updateBook: (book: BookCU, id: string) => Promise<void>;
     deleteBook: (bookID: string) => Promise<void>;
     getBook: (bookID: string) => Promise<Book>;
+    updateParams: (params: PaginationParams) => void;
 }
 
 const BookContext = createContext<BookContextType | undefined>(undefined);
@@ -29,7 +31,7 @@ const BookContext = createContext<BookContextType | undefined>(undefined);
 export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [books, setBooks] = useState<BookList | null>(null);
-    const [currentParams, setCurrentParams] = useState<PaginationParams>({ page: INITIAL_PAGE, limit: DEFAULT_LIMIT });
+    const [currentParams, setCurrentParams] = useState<PaginationParams>({ page: INITIAL_PAGE, limit: DEFAULT_LIMIT, query: "", userId: "" });
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -37,12 +39,11 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         fetchBooks(currentParams);
     }, []);
 
-    const fetchBooks = async (params: PaginationParams) => {
+    const fetchBooks = async (params: PaginationParams = currentParams) => {
         try {
             setLoading(true);
             const bookList = await getBooksService(params);
             setBooks(bookList);
-            console.log("Books fetched successfully");
             setCurrentParams(params);
         } catch (error) {
             setError("Error fetching books");
@@ -50,6 +51,13 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         } finally {
             setLoading(false);
         }
+    }
+
+    const updateParams = (params: PaginationParams) => {
+        setCurrentParams((prevParams) => ({
+            ...prevParams,
+            ...params,
+        }));
     }
 
     const addBook = async (book: BookCU) => {
@@ -93,7 +101,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
 
     return (
-        <BookContext.Provider value={{ books, currentParams, error, loading, fetchBooks, addBook, updateBook, deleteBook, getBook }}>
+        <BookContext.Provider value={{ books, currentParams, error, loading, fetchBooks, addBook, updateBook, deleteBook, getBook, updateParams }}>
             {children}
         </BookContext.Provider>
     )

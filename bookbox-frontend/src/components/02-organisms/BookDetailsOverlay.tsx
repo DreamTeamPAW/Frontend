@@ -11,12 +11,13 @@ import {
   bookOverlayDeletePopupStyle1,
   bookOverlayDeletePopupStyle2,
 } from "@/styles/classes";
-import { deleteBook } from "@/services/bookService";
+import { useBooks } from "@/context/BookContext";
+import { PaginationParams } from "@/types/Pagination";
 
 interface BookDetailsOverlayProps {
   book: Book;
   onClose: () => void;
-  onBookDeleted?: () => void;
+  onBookDeleted?: (PaginationParams: PaginationParams) => Promise<void>
 }
 
 const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
@@ -25,6 +26,8 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
   onBookDeleted,
 }) => {
   const [showConfirm, setShowConfirm] = React.useState(false);
+  const { deleteBook } = useBooks();
+  const { currentParams } = useBooks();
 
   return (
     <div className={bookOverlayWindowStyle}>
@@ -58,7 +61,7 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
                 label="Status"
                 value={
                   BookStatus[
-                    book.status.toUpperCase() as keyof typeof BookStatus
+                  book.status.toUpperCase() as keyof typeof BookStatus
                   ]
                 }
               />
@@ -98,7 +101,7 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
                 onClick={async () => {
                   try {
                     await deleteBook(book._id);
-                    if (onBookDeleted) onBookDeleted();
+                    if (onBookDeleted) await onBookDeleted(currentParams);
                     onClose();
                   } catch (error) {
                     alert("Failed to delete book.");
