@@ -16,7 +16,7 @@ const BookGridWithPagination: React.FC<Props> = ({
   setSelected,
 }) => {
   const { books, currentParams } = useBooks();
-  const { updateBook, updateParams } = useBooks();
+  const { updateBookStatus, updateParams } = useBooks();
   return <div className="p-8">
     <div
       className="grid gap-20 justify-center"
@@ -64,7 +64,7 @@ const BookGridWithPagination: React.FC<Props> = ({
                       dateAdded: book.dateAdded.toString(),
                     }
                     book.status = BookStatus[newStatus as keyof typeof BookStatus];
-                    await updateBook(modifiedBook, book._id);
+                    await updateBookStatus(modifiedBook, book._id);
                   }}
                 />
               </div>

@@ -12,6 +12,9 @@ import AddBookOverlay from "@/components/02-organisms/AddBookOverlay";
 import AddBookForm from "../02-organisms/AddBookForm";
 import { logout } from "@/services/authService";
 import { useRouter } from "next/navigation";
+import { useBooks } from "@/context/BookContext";
+import { toast, ToastContainer } from "react-toastify";
+import { triggerAsyncId } from "async_hooks";
 
 interface NavBarProps {
 }
@@ -20,6 +23,7 @@ interface NavBarProps {
 export const NavBar: React.FC<NavBarProps> = () => {
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
+  const { triggerSuccessMessage, successMessage } = useBooks();
 
   const handleLogout = async () => {
     try {
@@ -69,12 +73,19 @@ export const NavBar: React.FC<NavBarProps> = () => {
         <Button noDefaultStyle className={textButtonStyle} draggable="false" onClick={handleLogout}>
           Logout
         </Button>
+        {successMessage && (
+          <div>
+            <ToastContainer />
+          </div>
+        )}
       </div>
 
 
       {/* Add Book Overlay as a molecule */}
       <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >
-        <AddBookForm />
+        <AddBookForm onAdd={() => {
+          setAddBookOpen(false)
+        }} />
       </AddBookOverlay>
     </nav>
   );

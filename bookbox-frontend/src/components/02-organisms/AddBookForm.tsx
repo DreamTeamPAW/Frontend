@@ -6,12 +6,13 @@ import { BookStatus } from '@/types/Book';
 import FilePicker from '../00-atoms/FilePicker';
 import { getUser } from '@/services/authService';
 import { useBooks } from '@/context/BookContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface AddBookFormProps {
-  onBookUpdated?: () => void;
+  onAdd: () => void;
 }
 
-const AddBookForm: React.FC<AddBookFormProps> = () => {
+const AddBookForm: React.FC<AddBookFormProps> = ({ onAdd }) => {
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
   const [status, setStatus] = React.useState(BookStatus.UNREAD);
@@ -19,7 +20,6 @@ const AddBookForm: React.FC<AddBookFormProps> = () => {
   const [file, setFile] = React.useState<File | null>(null);
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [userId, setUserId] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const { addBook } = useBooks()
 
   useEffect(() => {
@@ -63,18 +63,15 @@ const AddBookForm: React.FC<AddBookFormProps> = () => {
         status: statusKey || BookStatus.UNREAD,
         dateAdded: new Date().toISOString(),
       };
-      console.log(newBook);
       try {
-        const addedBook = await addBook(newBook);
-        console.log(addedBook);
+        await addBook(newBook);
         setTitle("");
         setAuthor("");
         setStatus(BookStatus.UNREAD);
         setCoverUrl(DEFAULT_BASE64_IMAGE);
         setFile(null);
         if (fileRef.current) fileRef.current.value = "";
-        setSuccessMessage("Book added successfully!");
-        setTimeout(() => setSuccessMessage(""), 3000);
+        onAdd();
       } catch (error) {
         console.error("Failed to add book:", error);
       }
@@ -106,13 +103,11 @@ const AddBookForm: React.FC<AddBookFormProps> = () => {
           fileRef={fileRef}
           onFileChange={handleFileChange} />
 
-        <button type="submit" className={`${addBookFormButtonStyle}`}>
-          Add Book
-        </button>
-        {/*TODO ADJUST TO MAKE IT LOOK PRETTY*/}
-        {successMessage && (
-          <div className="text-green-600 font-semibold mb-2">{successMessage}</div>
-        )}
+        <div>
+          <button type="submit" className={`${addBookFormButtonStyle}`}>
+            Add Book
+          </button>
+        </div>
       </form>
     </div>
   );

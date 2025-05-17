@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import NavBar from "@components/01-molecules/NavBar";
 import PaginationAndFilter from "@components/02-organisms/PaginationAndFilter";
 import BookGridWithPagination from "@components/02-organisms/BookGridWithPagination";
 import BookDetailsOverlay from "@components/02-organisms/BookDetailsOverlay";
-import { Book } from "@/types/Book";
 import { useBooks } from "@/context/BookContext";
+import { ToastContainer } from "react-toastify";
+import { updateBook } from "@/services/bookService";
+import EditBookOverlay from "../02-organisms/EditBookOverlay";
+import EditBookForm from "../02-organisms/EditBookForm";
 
 interface HomepageTemplateProps {
   loading: boolean;
@@ -13,19 +16,18 @@ interface HomepageTemplateProps {
 const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
   loading,
 }) => {
-  const [selected, setSelected] = useState<Book | null>(null);
-  const { fetchBooks } = useBooks();
+  const { selectedBook, setSelectedBook, updatedBook } = useBooks();
 
 
 
   useEffect(() => {
-    if (!selected) return;
+    if (!selectedBook) return;
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelected(null);
+      if (event.key === "Escape") setSelectedBook(null);
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, [selected]);
+  }, [selectedBook]);
 
   useEffect(() => {
     document.documentElement.style.overflowY = "scroll";
@@ -36,6 +38,7 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
 
   return (
     <div>
+      <ToastContainer />
       <NavBar />
       <img
         src="/images/Booknav.png"
@@ -48,13 +51,19 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
       {/* Book Grid + Pagination */}
       <BookGridWithPagination
         loading={loading}
-        setSelected={setSelected}
+        setSelected={setSelectedBook}
       />
 
       {/* Overlay for Book Details */}
-      {selected && (
-        <BookDetailsOverlay onBookDeleted={fetchBooks} book={selected} onClose={() => setSelected(null)} />
+      {selectedBook && (
+        <BookDetailsOverlay />
       )}
+      {updatedBook && (
+        <EditBookOverlay>
+          <EditBookForm />
+        </EditBookOverlay>
+      )
+      }
     </div>
   );
 };
