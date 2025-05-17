@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   textButtonStyle,
   imageButtonStyle,
@@ -12,16 +12,19 @@ import AddBookOverlay from "@/components/02-organisms/AddBookOverlay";
 import AddBookForm from "../02-organisms/AddBookForm";
 import { logout } from "@/services/authService";
 import { useRouter } from "next/navigation";
+import { useBooks } from "@/context/BookContext";
+import { toast, ToastContainer } from "react-toastify";
+import { triggerAsyncId } from "async_hooks";
 
 interface NavBarProps {
-  onBookUpdated?: () => void;
 }
 
 
-export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
+export const NavBar: React.FC<NavBarProps> = () => {
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
-  
+  const { triggerSuccessMessage, successMessage } = useBooks();
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -68,14 +71,21 @@ export const NavBar: React.FC<NavBarProps> = ({onBookUpdated}) => {
           </Button>
         </Link>
         <Button noDefaultStyle className={textButtonStyle} draggable="false" onClick={handleLogout}>
-            Logout
+          Logout
         </Button>
+        {successMessage && (
+          <div>
+            <ToastContainer />
+          </div>
+        )}
       </div>
-      
+
 
       {/* Add Book Overlay as a molecule */}
       <AddBookOverlay open={addBookOpen} onClose={() => setAddBookOpen(false)} >
-        <AddBookForm onBookUpdated={onBookUpdated}/>
+        <AddBookForm onAdd={() => {
+          setAddBookOpen(false)
+        }} />
       </AddBookOverlay>
     </nav>
   );

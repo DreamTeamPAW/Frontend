@@ -5,12 +5,12 @@ import {
 } from "../services/adminService";
 
 import { UserList } from "../types/User";
-import { PaginationParams } from "../types/Pagination";
+import { PaginationParams, UserPaginationParams } from "../types/Pagination";
 import { DEFAULT_LIMIT, INITIAL_PAGE } from "../services/constants";
 
 type AdminContextType = {
 	users: UserList | null;
-	currentParams: PaginationParams;
+	currentParams: UserPaginationParams;
 	error: string | null;
 	loading: boolean;
 	fetchUsers: (params: PaginationParams) => Promise<void>;
@@ -21,7 +21,7 @@ const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [users, setUsers] = useState<UserList | null>(null);
-	const [currentParams, setCurrentParams] = useState<PaginationParams>({
+	const [currentParams, setCurrentParams] = useState<UserPaginationParams>({
 		page: INITIAL_PAGE,
 		limit: DEFAULT_LIMIT,
 	});
@@ -32,7 +32,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 		fetchUsers(currentParams);
 	}, []);
 
-	const fetchUsers = async (params: PaginationParams) => {
+	const fetchUsers = async (params: UserPaginationParams) => {
 		try {
 			setLoading(true);
 			const userList = await getUsersService(params);

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import InputFieldRow from '../00-atoms/InputFieldRow';
-import Button from '../00-atoms/Button';
 import { addBookFormButtonStyle, addBookFormImageStyle, addBookFormStyle, DEFAULT_BASE64_IMAGE, primaryButtonStyle } from '@/styles/classes';
 import DropdownInputRow from '../00-atoms/DropdownInputRow';
-import { Book, BookStatus } from '@/types/Book';
+import { BookStatus } from '@/types/Book';
 import FilePicker from '../00-atoms/FilePicker';
-import { addBook } from '@/services/bookService';
 import { getUser } from '@/services/authService';
+import { useBooks } from '@/context/BookContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface AddBookFormProps {
-  onBookUpdated?: () => void;
+  onAdd: () => void;
 }
 
-const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
+const AddBookForm: React.FC<AddBookFormProps> = ({ onAdd }) => {
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
   const [status, setStatus] = React.useState(BookStatus.UNREAD);
@@ -20,8 +20,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
   const [file, setFile] = React.useState<File | null>(null);
   const fileRef = React.useRef<HTMLInputElement>(null);
   const [userId, setUserId] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
+  const { addBook } = useBooks()
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -61,21 +60,18 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
         title: title,
         author: author,
         cover: coverUrl,
-        status: statusKey,
+        status: statusKey || BookStatus.UNREAD,
         dateAdded: new Date().toISOString(),
       };
-        console.log(newBook);
       try {
-        const addedBook = await addBook(newBook);
+        await addBook(newBook);
         setTitle("");
         setAuthor("");
         setStatus(BookStatus.UNREAD);
         setCoverUrl(DEFAULT_BASE64_IMAGE);
         setFile(null);
         if (fileRef.current) fileRef.current.value = "";
-        setSuccessMessage("Book added successfully!"); 
-        setTimeout(() => setSuccessMessage(""), 3000);
-        if(onBookUpdated) onBookUpdated();
+        onAdd();
       } catch (error) {
         console.error("Failed to add book:", error);
       }
@@ -106,14 +102,12 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onBookUpdated }) => {
           pickedFile={file}
           fileRef={fileRef}
           onFileChange={handleFileChange} />
-          
-        <Button type="submit" className={`${addBookFormButtonStyle}`}>
-          Add Book
-        </Button>
-        {/*TODO ADJUST TO MAKE IT LOOK PRETTY*/}
-        {successMessage && (
-  <div className="text-green-600 font-semibold mb-2">{successMessage}</div>
-)}
+
+        <div>
+          <button type="submit" className={`${addBookFormButtonStyle}`}>
+            Add Book
+          </button>
+        </div>
       </form>
     </div>
   );

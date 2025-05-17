@@ -1,66 +1,37 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import HomepageTemplate from "@/components/03-templates/HomepageTemplate";
-import { getBooks } from "@/services/bookService";
-import { Book } from "@/types/Book";
-import { BookPagination, PaginationParams } from "@/types/Pagination";
-import { getUser } from "@/services/authService";
+import { useAuth } from "@/context/AuthContext";
+import { useBooks } from "@/context/BookContext";
+import { useDebouncedCallback } from "use-debounce";
 
 const HomePage: React.FC = () => {
-  const [query, setFilter] = useState("");
-  const [limit, setLimit] = useState(15);
-  const [page, setPage] = useState(1);
-  const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<BookPagination | null>(null);
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [refetchTrigger, setRefetchTrigger] = useState(0);
+  const [refetchTrigger] = useState(0);
+  const { user } = useAuth();
+  const { fetchBooks } = useBooks();
+  const { currentParams } = useBooks();
 
-  
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userResponse = await getUser();
-        setUserId(userResponse._id);
-        console.log("UserId: ", userResponse);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-
-    if (!userId) return;
-    console.log("UserId: ", userId);
+  const debouncedFetchBooks = useDebouncedCallback((params) => {
     setLoading(true);
-    const params: PaginationParams = { page, limit, query, userId };
-    getBooks(params)
-      .then((data) => {
-        setBooks(data.books);
-        setPagination(data.pagination);
-      })
-      .finally(() => setLoading(false));
-  }, [query, limit, page, userId, refetchTrigger]);
+    fetchBooks(params)
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, 500);
 
-  const refetchBooks = () => setRefetchTrigger((n) => n + 1);
+  useEffect(() => {
+    if (!user) return;
+    const userId = user._id;
+    currentParams.userId = userId
+
+    debouncedFetchBooks(currentParams);
+
+  }, [currentParams.query, currentParams.limit, currentParams.page, user?._id, refetchTrigger]);
 
   return (
     <HomepageTemplate
-      books={books}
-      pagination={pagination}
       loading={loading}
-      query={query}
-      setFilter={setFilter}
-      limit={limit}
-      setLimit={setLimit}
-      page={page}
-      setPage={setPage}
-      userId={userId}
-      onBookUpdated={refetchBooks}
     />
   );
 };

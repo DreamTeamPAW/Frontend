@@ -11,27 +11,23 @@ import {
   bookOverlayDeletePopupStyle1,
   bookOverlayDeletePopupStyle2,
 } from "@/styles/classes";
-import { deleteBook } from "@/services/bookService";
+import { useBooks } from "@/context/BookContext";
 
 interface BookDetailsOverlayProps {
-  book: Book;
-  onClose: () => void;
-  onBookDeleted?: () => void;
 }
 
-const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
-  book,
-  onClose,
-  onBookDeleted,
-}) => {
+const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
   const [showConfirm, setShowConfirm] = React.useState(false);
+  const { deleteBook, fetchBooks, setSelectedBook, setUpdatedBook } = useBooks();
+  const { currentParams } = useBooks();
+  const { selectedBook } = useBooks();
 
   return (
     <div className={bookOverlayWindowStyle}>
       <div className={bookOverlayStyle}>
         <button
           className={bookOverlayCloseButtonStyle}
-          onClick={onClose}
+          onClick={() => setSelectedBook(null)}
           aria-label="Close"
         >
           &times;
@@ -39,33 +35,39 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
         <div className="flex gap-6">
           <img
             src={
-              book.cover && book.cover.startsWith("data:image/")
-                ? book.cover
+              selectedBook?.cover && selectedBook.cover.startsWith("data:image/")
+                ? selectedBook.cover
                 : "images/placeholder.jpg"
             }
-            alt={book.title}
+            alt={selectedBook?.title}
             className="w-full h-auto object-cover rounded"
           />
           <div>
             <div className="mt-8 grid gap-3">
-              <BookInfoRow label="Title" value={book.title} />
-              <BookInfoRow label="Author" value={book.author} />
+              <BookInfoRow label="Title" value={selectedBook?.title || ""} />
+              <BookInfoRow label="Author" value={selectedBook?.author || ""} />
               <BookInfoRow
                 label="Added to library"
-                value={new Date(book.dateAdded).toLocaleDateString()}
+                value={new Date(selectedBook?.dateAdded || new Date()).toLocaleDateString()}
               />
               <BookInfoRow
                 label="Status"
                 value={
                   BookStatus[
-                    book.status.toUpperCase() as keyof typeof BookStatus
+                  selectedBook?.status?.toUpperCase() as keyof typeof BookStatus
                   ]
                 }
               />
             </div>
 
             <div className="mt-auto">
-              <Button className={`${primaryButtonStyle} mt-12 relative z-10`}>
+              <Button
+                className={`${primaryButtonStyle} mt-12 relative z-10`}
+                onClick={() => {
+                  setUpdatedBook(selectedBook);
+                  setSelectedBook(null);
+                }}
+              >
                 Edit Book
               </Button>
               <Button
@@ -90,16 +92,17 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = ({
           <div className={bookOverlayDeletePopupStyle2}>
             <h2 className="text-lg font-semibold mb-4">Remove Book</h2>
             <p className="mb-6">
-              Are you sure you want to remove <span className="font-bold break-all">"{book.title}"</span>?
+              Are you sure you want to remove <span className="font-bold break-all">"{selectedBook?.title}"</span>?
             </p>
             <div className="flex justify-center gap-4">
               <Button
                 className={primaryButtonStyle}
                 onClick={async () => {
                   try {
-                    await deleteBook(book._id);
-                    if (onBookDeleted) onBookDeleted();
-                    onClose();
+                    if (!selectedBook) return;
+                    await deleteBook(selectedBook._id);
+                    await fetchBooks(currentParams);
+                    setSelectedBook(null);
                   } catch (error) {
                     alert("Failed to delete book.");
                     console.error(error);

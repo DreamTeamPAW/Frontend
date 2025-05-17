@@ -1,6 +1,6 @@
 import api from './api';
 import { AxiosError } from 'axios';
-import { LOGIN_URL, REGISTER_URL, LOGOUT_URL, ME_URL } from './constants';
+import { LOGIN_URL, REGISTER_URL, ME_URL } from './constants';
 import { User } from '@/types/User';
 import { clearToken, setToken } from '@/utils/token';
 
@@ -24,6 +24,10 @@ interface LoginResponse {
     token: string;
 }
 
+interface MeResponse {
+    user: User;
+}
+
 export const login = async (credentials: LoginCredentials): Promise<void> => {
     try {
         const response = await api.post<LoginResponse>(LOGIN_URL, credentials);
@@ -41,8 +45,7 @@ export const login = async (credentials: LoginCredentials): Promise<void> => {
 
 export const register = async (credentials: RegisterCredentials): Promise<void> => {
     try {
-        const response = await api.post<AuthResponse>(REGISTER_URL, credentials);
-        console.log(response.data.message);
+        await api.post<AuthResponse>(REGISTER_URL, credentials);
     } catch (error) {
         console.error("Error registering: ", error);
         let errorMessage = 'Error registering';
@@ -70,7 +73,7 @@ export const logout = async (): Promise<void> => {
 
 export const getUser = async (): Promise<User> => {
     try {
-        const response = await api.get<User>(ME_URL);
+        const response = await api.get<MeResponse>(ME_URL);
         return response.data.user;
     } catch (error) {
         console.error("Error fetching user: ", error);

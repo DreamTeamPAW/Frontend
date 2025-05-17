@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from "react";
-import { bookOverlayWindowStyle, bookOverlayStyle, bookOverlayCloseButtonStyle, addBookOverlayHeaderStyle, addBookOverlayImageStyle, addBookOverlayStyle } from "@/styles/classes";
+import { bookOverlayWindowStyle, bookOverlayCloseButtonStyle, addBookOverlayHeaderStyle, addBookOverlayImageStyle, addBookOverlayStyle } from "@/styles/classes";
 
 interface AddBookOverlayProps {
   open: boolean;
