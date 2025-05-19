@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import { useBooks } from "@/context/BookContext";
 import { toast, ToastContainer } from "react-toastify";
 import { triggerAsyncId } from "async_hooks";
+import { useAuth } from "@/context/AuthContext";
+import { ADMIN_PANEL_URL, API_URL } from "@/services/constants";
 
 interface NavBarProps {
 }
@@ -24,6 +26,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
   const [addBookOpen, setAddBookOpen] = useState(false);
   const router = useRouter();
   const { triggerSuccessMessage, successMessage } = useBooks();
+  const { user } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -52,6 +55,14 @@ export const NavBar: React.FC<NavBarProps> = () => {
         </Button>
       </Link>
       <div className={navBarSpacedTextButtons}>
+        {user?.role === "admin" && (
+          <Link href={`${API_URL}${ADMIN_PANEL_URL}`} passHref draggable="false">
+            <Button noDefaultStyle className={textButtonStyle} draggable="false">
+              Admin panel
+            </Button>
+          </Link>
+        )}
+
         <Link href="/home" passHref draggable="false">
           <Button noDefaultStyle className={textButtonStyle} draggable="false">
             My library
