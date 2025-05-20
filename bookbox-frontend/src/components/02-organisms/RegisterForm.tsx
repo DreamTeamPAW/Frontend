@@ -8,6 +8,7 @@ import { User, Lock } from "@phosphor-icons/react/dist/ssr";
 import { primaryButtonStyle, tertiaryTextLabelStyle } from "@/styles/classes";
 import Link from "next/link";
 import { register } from "@/services/authService"
+import { toast } from "react-toastify";
 
 
 const RegisterForm: React.FC = () => {
@@ -15,8 +16,6 @@ const RegisterForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -24,12 +23,12 @@ const RegisterForm: React.FC = () => {
     e.preventDefault();
 
     if (!email || !username || !password || !repeatPassword) {
-      setError("All fields must be filled.");
+      toast.error("All fields must be filled.");
       return;
     }
 
     if (password !== repeatPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
@@ -39,14 +38,8 @@ const RegisterForm: React.FC = () => {
         username,
         password,
       });
-
-      setSuccess("Registration successful! You can now log in.");
-      setError(null);
-
       router.push("/login");
     } catch (err: any) {
-      setError(err.message || "An error occurred during registration.");
-      setSuccess(null);
     }
 
   };
@@ -92,8 +85,6 @@ const RegisterForm: React.FC = () => {
         onChange={(e) => setRepeatPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
       />
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
 
       <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}

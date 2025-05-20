@@ -6,8 +6,6 @@ import BookDetailsOverlay from "@components/02-organisms/BookDetailsOverlay";
 import { useBooks } from "@/context/BookContext";
 import { ToastContainer } from "react-toastify";
 import { updateBook } from "@/services/bookService";
-import EditBookOverlay from "../02-organisms/EditBookOverlay";
-import EditBookForm from "../02-organisms/EditBookForm";
 
 interface HomepageTemplateProps {
   loading: boolean;
@@ -58,10 +56,10 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
       {selectedBook && (
         <BookDetailsOverlay />
       )}
-      {updatedBook && (
+      {updatedBook && ({/*
         <EditBookOverlay>
           <EditBookForm />
-        </EditBookOverlay>
+        </EditBookOverlay>*/}
       )
       }
     </div>

@@ -3,6 +3,7 @@ import { AxiosError } from 'axios';
 import { LOGIN_URL, REGISTER_URL, ME_URL } from './constants';
 import { User } from '@/types/User';
 import { clearToken, setToken } from '@/utils/token';
+import { toast } from 'react-toastify';
 
 export interface LoginCredentials {
     email: string;
@@ -33,12 +34,14 @@ export const login = async (credentials: LoginCredentials): Promise<void> => {
         const response = await api.post<LoginResponse>(LOGIN_URL, credentials);
         const token = response.data.token;
         setToken(token);
+        toast.success("Login successful!");
     } catch (error) {
         console.error("Error logging in: ", error);
         let errorMessage = 'Error logging in';
         if (error instanceof AxiosError && error.response?.data?.message) {
             errorMessage = error.response.data.message;
         }
+        toast.error(errorMessage + ". Invalid email or password!");
         throw new Error(errorMessage);
     }
 };
@@ -46,12 +49,14 @@ export const login = async (credentials: LoginCredentials): Promise<void> => {
 export const register = async (credentials: RegisterCredentials): Promise<void> => {
     try {
         await api.post<AuthResponse>(REGISTER_URL, credentials);
+        toast.success("Registration successful!");
     } catch (error) {
         console.error("Error registering: ", error);
         let errorMessage = 'Error registering';
         if (error instanceof AxiosError && error.response?.data?.message) {
             errorMessage = error.response.data.message;
         }
+        toast.error(errorMessage);
         throw new Error(errorMessage);
     }
 }
