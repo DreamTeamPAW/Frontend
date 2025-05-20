@@ -6,6 +6,7 @@ export const ME_URL = '/api/me';
 
 export const BOOKS_URL = '/api/books';
 export const USERS_URL = '/api/users';
+export const ADMIN_PANEL_URL = '/admin';
 
 export const AUTH_TOKEN_KEY = 'authToken';
 
