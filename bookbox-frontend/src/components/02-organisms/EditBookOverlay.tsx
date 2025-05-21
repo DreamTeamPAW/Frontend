@@ -59,7 +59,7 @@ const EditBookOverlay: React.FC<EditBookOverlayProps> = ({
         >
           &times;
         </button>
-        <h2 className={`${addBookOverlayHeaderStyle}`}>Add a Book</h2>
+        <h2 className={`${addBookOverlayHeaderStyle}`}>Edit book</h2>
         {children}
         <img
           src="/images/Booknav.png"

@@ -12,6 +12,8 @@ import { Book, BookList } from '../types/Book';
 import { DEFAULT_LIMIT, INITIAL_PAGE } from '@/services/constants';
 import { PaginationParams } from '@/types/Pagination';
 import { toast } from 'react-toastify';
+import { useAuth } from './AuthContext';
+import { getIDfromToken } from '@/utils/token';
 
 
 type BookContextType = {
@@ -39,7 +41,12 @@ const BookContext = createContext<BookContextType | undefined>(undefined);
 export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [books, setBooks] = useState<BookList | null>(null);
-    const [currentParams, setCurrentParams] = useState<PaginationParams>({ page: INITIAL_PAGE, limit: DEFAULT_LIMIT, query: "", userId: "" });
+    const [currentParams, setCurrentParams] = useState<PaginationParams>({
+        page: INITIAL_PAGE,
+        limit: DEFAULT_LIMIT,
+        query: "",
+        userId: "",
+    });
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -47,6 +54,8 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     useEffect(() => {
+        currentParams.userId = getIDfromToken();
+        console.log("Fetching with user ID:", currentParams.userId);
         fetchBooks(currentParams);
     }, []);
 
