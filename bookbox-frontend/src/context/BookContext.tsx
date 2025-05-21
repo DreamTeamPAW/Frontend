@@ -12,7 +12,6 @@ import { Book, BookList } from '../types/Book';
 import { DEFAULT_LIMIT, INITIAL_PAGE } from '@/services/constants';
 import { PaginationParams } from '@/types/Pagination';
 import { toast } from 'react-toastify';
-import { useAuth } from './AuthContext';
 import { getIDfromToken } from '@/utils/token';
 
 
@@ -55,7 +54,6 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     useEffect(() => {
         currentParams.userId = getIDfromToken();
-        console.log("Fetching with user ID:", currentParams.userId);
         fetchBooks(currentParams);
     }, []);
 
