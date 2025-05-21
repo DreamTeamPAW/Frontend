@@ -11,3 +11,16 @@ export const getToken = (): string | null => {
 export const clearToken = (): void => {
     localStorage.removeItem(AUTH_TOKEN_KEY);
 };
+
+export const getIDfromToken = (): string => {
+    const token = getToken();
+    if (!token) {
+        throw new Error("Token not found");
+    }
+
+    const payload = token.split(".")[1];
+    const decodedPayload = atob(payload);
+    const payloadObj = JSON.parse(decodedPayload);
+
+    return payloadObj?.id;
+}
