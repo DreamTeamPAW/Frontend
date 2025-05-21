@@ -119,6 +119,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             await deleteBookService(bookID);
             toast.success("Book deleted successfully");
+            setSelectedBook(null);
             fetchBooks(currentParams);
         } catch (error) {
             setError("Error deleting a book");

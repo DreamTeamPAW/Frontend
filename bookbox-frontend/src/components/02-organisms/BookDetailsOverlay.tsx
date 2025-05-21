@@ -1,5 +1,5 @@
 import React from "react";
-import { Book, BookStatus } from "@/types/Book";
+import { BookStatus } from "@/types/Book";
 import BookInfoRow from "@components/00-atoms/BookInfoRow";
 import Button from "@components/00-atoms/Button";
 import {
@@ -10,11 +10,15 @@ import {
   bookOverlayStyle,
   bookOverlayDeletePopupStyle1,
   bookOverlayDeletePopupStyle2,
+  addBookOverlayStyle,
+  addBookOverlayImageStyle,
+  addBookFormImageStyle,
+  addBookFormButtonStyle,
+  addBookOverlayHeaderStyle,
 } from "@/styles/classes";
 import { useBooks } from "@/context/BookContext";
 
-interface BookDetailsOverlayProps {
-}
+interface BookDetailsOverlayProps { }
 
 const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
   const [showConfirm, setShowConfirm] = React.useState(false);
@@ -32,7 +36,8 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
         >
           &times;
         </button>
-        <div className="flex gap-6">
+        <h2 className={`${addBookOverlayHeaderStyle}`}>Book details</h2>
+        <div className="flex justify-between items-center mt-4">
           <img
             src={
               selectedBook?.cover && selectedBook.cover.startsWith("data:image/")
@@ -40,10 +45,10 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
                 : "images/placeholder.jpg"
             }
             alt={selectedBook?.title}
-            className="w-full h-auto object-cover rounded"
+            className={`${addBookFormImageStyle}`}
           />
-          <div>
-            <div className="mt-8 grid gap-3">
+          <div className="flex flex-col justify-around h-full">
+            <div>
               <BookInfoRow label="Title" value={selectedBook?.title || ""} />
               <BookInfoRow label="Author" value={selectedBook?.author || ""} />
               <BookInfoRow
@@ -59,10 +64,9 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
                 }
               />
             </div>
-
-            <div className="mt-auto">
+            <div className="flex flex-col">
               <Button
-                className={`${primaryButtonStyle} mt-12 relative z-10`}
+                className={`${addBookFormButtonStyle} mt-4`}
                 onClick={() => {
                   setUpdatedBook(selectedBook);
                   setSelectedBook(null);
@@ -71,7 +75,7 @@ const BookDetailsOverlay: React.FC<BookDetailsOverlayProps> = () => {
                 Edit Book
               </Button>
               <Button
-                className={`${tertiaryButtonStyle} mt-4 relative z-10`}
+                className={`${tertiaryButtonStyle} mt-4`}
                 onClick={() => setShowConfirm(true)}
               >
                 Remove Book
