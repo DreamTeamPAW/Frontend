@@ -46,45 +46,45 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
       {/* Email Field */}
       <FormField
         type="email"
         placeholder="Email"
-        //className="w-s"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         icon={<EnvelopeSimple  size={18}  className="text-gray-500" />}
+        autoComplete="email"
       />
 
       {/* Username Field */}
       <FormField
-        type="username"
+        type="text"
         placeholder="Username"
-        //className="w-s"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         icon={<User size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="username"
       />
 
       {/* Password Field */}
       <FormField
         type="password"
         placeholder="Password"
-        //className="w-s"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="new-password"
       />
 
       {/*Repeat Password Field */}
       <FormField
         type="password"
         placeholder="Repeat password"
-        //className="w-s"
         value={repeatPassword}
         onChange={(e) => setRepeatPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="new-password"
       />
 
       <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>

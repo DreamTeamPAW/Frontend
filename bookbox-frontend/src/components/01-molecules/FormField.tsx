@@ -8,6 +8,7 @@ interface FormFieldProps {
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon?: React.ReactNode;
+  autoComplete?: string;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -17,6 +18,7 @@ const FormField: React.FC<FormFieldProps> = ({
   value,
   onChange,
   icon,
+  autoComplete,
 }) => {
   return (
     <div className="space-y-2">
@@ -27,6 +29,7 @@ const FormField: React.FC<FormFieldProps> = ({
         value={value}
         onChange={onChange}
         icon={icon}
+        autoComplete={autoComplete}
       />
     </div>
   );
