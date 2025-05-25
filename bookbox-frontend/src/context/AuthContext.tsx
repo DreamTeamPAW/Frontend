@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getUser, login, logout, register, LoginCredentials, RegisterCredentials } from "../services/authService";
 import { User } from "@/types/User";
+import { toast } from 'react-toastify';
 
 
 interface AuthContextType {
@@ -42,11 +43,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setLoading(true);
         try {
             await login(credentials);
+            toast.success("success");
             const user = await getUser();
             setUser(user);
         } catch (error) {
             setError("Error logging in");
             console.error("Error logging in: ", error);
+            toast.error("error");
             setUser(null);
             throw error;
         } finally {

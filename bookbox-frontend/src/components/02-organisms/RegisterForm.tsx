@@ -8,6 +8,8 @@ import { User, Lock } from "@phosphor-icons/react/dist/ssr";
 import { primaryButtonStyle, tertiaryTextLabelStyle } from "@/styles/classes";
 import Link from "next/link";
 import { register } from "@/services/authService"
+import { toast } from "react-toastify";
+import { EnvelopeSimple } from "@phosphor-icons/react/dist/icons/EnvelopeSimple";
 
 
 const RegisterForm: React.FC = () => {
@@ -15,8 +17,6 @@ const RegisterForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -24,12 +24,12 @@ const RegisterForm: React.FC = () => {
     e.preventDefault();
 
     if (!email || !username || !password || !repeatPassword) {
-      setError("All fields must be filled.");
+      toast.error("All fields must be filled.");
       return;
     }
 
     if (password !== repeatPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
@@ -39,61 +39,53 @@ const RegisterForm: React.FC = () => {
         username,
         password,
       });
-
-      setSuccess("Registration successful! You can now log in.");
-      setError(null);
-
       router.push("/login");
     } catch (err: any) {
-      setError(err.message || "An error occurred during registration.");
-      setSuccess(null);
     }
 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
       {/* Email Field */}
       <FormField
         type="email"
         placeholder="Email"
-        //className="w-s"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        icon={<User size={18} weight="fill" className="text-gray-500" />}
+        icon={<EnvelopeSimple  size={18}  className="text-gray-500" />}
+        autoComplete="email"
       />
 
       {/* Username Field */}
       <FormField
-        type="username"
+        type="text"
         placeholder="Username"
-        //className="w-s"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         icon={<User size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="username"
       />
 
       {/* Password Field */}
       <FormField
         type="password"
         placeholder="Password"
-        //className="w-s"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="new-password"
       />
 
       {/*Repeat Password Field */}
       <FormField
         type="password"
         placeholder="Repeat password"
-        //className="w-s"
         value={repeatPassword}
         onChange={(e) => setRepeatPassword(e.target.value)}
         icon={<Lock size={18} weight="fill" className="text-gray-500" />}
+        autoComplete="new-password"
       />
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
 
       <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>Already have an account? Log in</Link>
       {/* Submit Button */}
