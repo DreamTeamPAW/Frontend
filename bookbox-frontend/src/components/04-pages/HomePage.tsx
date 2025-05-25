@@ -22,11 +22,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (!user) return;
-    const userId = user._id;
-    currentParams.userId = userId
-
     debouncedFetchBooks(currentParams);
-
   }, [currentParams.query, currentParams.limit, currentParams.page, user?._id, refetchTrigger]);
 
   return (

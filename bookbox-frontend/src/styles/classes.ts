@@ -59,7 +59,7 @@ export const bookInfoRowSecondaryTextStyle = "text-[var(--contrast-text-color)] 
 export const bookStatusDropdownTextStyle = "text-[var(--primary-text-color)] text-xl"
 
 export const bookOverlayWindowStyle = "fixed inset-0 bg-black flex items-center justify-center z-50 bg-black/60"
-export const bookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-3xl relative pb-22 overflow-hidden"
+export const bookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-4xl relative pb-22 overflow-hidden"
 export const bookOverlayCloseButtonStyle = "text-gray-500 hover:text-black text-4xl absolute top-1 right-4"
 
 export const bookOverlayDeletePopupStyle1 = "fixed inset-0 flex items-center justify-center bg-opacity-1 z-50"
@@ -85,7 +85,7 @@ export const inputFieldRowContainerStyle = "flex justify-between mb-2"
 //Add book form styles
 export const addBookFormImageStyle = "h-full mr-6 max-h-[280px] max-w-[250px] rounded-lg"
 export const addBookFormButtonStyle = `px-6 py-3 text-white rounded-full shadow-lg hover:drop-shadow-xl transition ${primaryButtonStyle} mt-4 self-start w-full`
-export const addBookFormStyle = "flex-col -between h-full w-[500px]"
+export const addBookFormStyle = "flex-col h-full w-[500px]"
 
 //Add book overlay styles
 export const addBookOverlayStyle = "bg-[var(--base-secondary-light)] rounded-2xl shadow-2xl p-6 max-w-4xl relative pb-22 overflow-hidden"

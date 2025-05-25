@@ -56,12 +56,13 @@ const HomepageTemplate: React.FC<HomepageTemplateProps> = ({
       {selectedBook && (
         <BookDetailsOverlay />
       )}
-      {updatedBook && ({/*
+      {updatedBook && (
         <EditBookOverlay>
           <EditBookForm />
-        </EditBookOverlay>*/}
+        </EditBookOverlay>
       )
       }
+
     </div>
   );
 };
