@@ -17,6 +17,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { triggerAsyncId } from "async_hooks";
 import { useAuth } from "@/context/AuthContext";
 import { ADMIN_PANEL_URL, API_URL } from "@/services/constants";
+import MyAccountOverlay from "../02-organisms/MyAccountOverlay";
 
 interface NavBarProps {
 }
@@ -24,6 +25,7 @@ interface NavBarProps {
 
 export const NavBar: React.FC<NavBarProps> = () => {
   const [addBookOpen, setAddBookOpen] = useState(false);
+  const [myAccountOpen, setMyAccountOpen] = useState(false);
   const router = useRouter();
   const { triggerSuccessMessage, successMessage } = useBooks();
   const { user } = useAuth();
@@ -76,11 +78,14 @@ export const NavBar: React.FC<NavBarProps> = () => {
         >
           Add book
         </Button>
-        <Link href="/home" passHref draggable="false">
-          <Button noDefaultStyle className={textButtonStyle} draggable="false">
-            My account
-          </Button>
-        </Link>
+        <Button
+          noDefaultStyle
+          className={textButtonStyle}
+          draggable="false"
+          onClick={() => setMyAccountOpen(true)}
+        >
+          My account
+        </Button>
         <Button noDefaultStyle className={textButtonStyle} draggable="false" onClick={handleLogout}>
           Logout
         </Button>
@@ -98,6 +103,9 @@ export const NavBar: React.FC<NavBarProps> = () => {
           setAddBookOpen(false)
         }} />
       </AddBookOverlay>
+
+      {/* My Account Overlay as a molecule */}
+      <MyAccountOverlay user={user} open={myAccountOpen} onClose={() => setMyAccountOpen(false)} />
     </nav>
   );
 };
