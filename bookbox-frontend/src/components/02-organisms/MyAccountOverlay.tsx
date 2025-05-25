@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import {
   bookOverlayWindowStyle,
-  bookOverlayCloseButtonStyle,
+  myAccountOverlayCloseButtonStyle,
   addBookOverlayHeaderStyle as myAccountOverlayHeaderStyle,
   myAccountOverlayContentBaseStyle,
   myAccountOverlayImageStyle, 
@@ -59,7 +59,7 @@ const MyAccountOverlay: React.FC<MyAccountOverlayProps> = ({
         ref={popupRef}
       >
         <button
-          className={`${bookOverlayCloseButtonStyle}`} 
+          className={`${myAccountOverlayCloseButtonStyle}`} 
           onClick={onClose}
           aria-label="Close account information dialog"
         >

@@ -105,11 +105,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
       </AddBookOverlay>
 
       {/* My Account Overlay as a molecule */}
-      <MyAccountOverlay user={user} open={myAccountOpen} onClose={() => setMyAccountOpen(false)} >
-        <AddBookForm onAdd={() => {
-          setAddBookOpen(false)
-        }} />
-      </MyAccountOverlay>
+      <MyAccountOverlay user={user} open={myAccountOpen} onClose={() => setMyAccountOpen(false)} />
     </nav>
   );
 };
