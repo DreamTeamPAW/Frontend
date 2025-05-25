@@ -9,6 +9,7 @@ import { primaryButtonStyle, tertiaryTextLabelStyle } from "@/styles/classes";
 import Link from "next/link";
 import { register } from "@/services/authService"
 import { toast } from "react-toastify";
+import { EnvelopeSimple } from "@phosphor-icons/react/dist/icons/EnvelopeSimple";
 
 
 const RegisterForm: React.FC = () => {
@@ -53,7 +54,7 @@ const RegisterForm: React.FC = () => {
         //className="w-s"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        icon={<User size={18} weight="fill" className="text-gray-500" />}
+        icon={<EnvelopeSimple  size={18}  className="text-gray-500" />}
       />
 
       {/* Username Field */}
