@@ -108,7 +108,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         } catch (error) {
             setError("Error updating a book");
             console.error("Error updating a book: ", error);
-            toast.error("Book status updated successfully");
+            toast.error("Error updating a book!");
         }
 
     }
