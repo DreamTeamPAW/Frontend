@@ -15,7 +15,6 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
 }) => {
   const popupRef = useRef<HTMLDivElement>(null);
 
-  {/* Close on Escape key */ }
   useEffect(() => {
     if (!open) return;
     function handleKeyDown(event: KeyboardEvent) {
@@ -27,7 +26,6 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open, onClose]);
 
-  {/* Close on outside click */ }
   useEffect(() => {
     if (!open) return;
     function handlePointerDown(event: PointerEvent) {
@@ -45,8 +43,8 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
   if (!open) return null;
 
   return (
-    <div className={`${bookOverlayWindowStyle}`} >
-      <div className={`${addBookOverlayStyle}`}>
+    <div className={`${bookOverlayWindowStyle}`}>
+      <div className={`${addBookOverlayStyle}`} ref={popupRef}>
         <button
           className={`${bookOverlayCloseButtonStyle}`}
           onClick={onClose}
@@ -65,5 +63,6 @@ const AddBookOverlay: React.FC<AddBookOverlayProps> = ({
     </div>
   );
 };
+
 
 export default AddBookOverlay;

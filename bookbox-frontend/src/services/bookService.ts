@@ -3,6 +3,7 @@ import { BOOKS_URL } from './constants'
 import { AxiosError } from 'axios';
 import { Book, BookStatus, BookList } from '../types/Book';
 import { PaginationParams } from '@/types/Pagination';
+import { toast } from 'react-toastify';
 
 
 export interface BookCU {
@@ -47,11 +48,7 @@ export const addBook = async (book: BookCU): Promise<BookCreateResponse> => {
         return response.data;
     } catch (error) {
         console.error("Error adding a book: ", error);
-        let errorMessage = 'Error adding a book';
-        if (error instanceof AxiosError && error.response?.data?.message) {
-            errorMessage = error.response.data.message;
-        }
-        throw new Error(errorMessage);
+        throw error;
     }
 };
 
@@ -62,6 +59,7 @@ export const getBook = async (bookID: string): Promise<Book> => {
     } catch (error) {
         console.error("Error fetching the book: ", error);
         let errorMessage = 'Error fetchingg the book';
+       
         if (error instanceof AxiosError && error.response?.data?.message) {
             errorMessage = error.response.data.message;
         }
@@ -85,12 +83,20 @@ export const deleteBook = async (bookID: string): Promise<void> => {
 export const updateBook = async (book: BookCU, id: string): Promise<BookUpdateResponse> => {
     try {
         const response = await api.put<BookUpdateResponse>(`${BOOKS_URL}/${id}`, book);
+        toast.success("Book updated successfully");
         return response.data;
     } catch (error) {
         console.error("Error updating book: ", error);
         let errorMessage = 'Error updating book';
+        if(error.response.status === 413){
+            toast.error("Image too big!");
+        }
+        else {
+            toast.error("Error updating book!", error);
+        }
         if (error instanceof AxiosError && error.response?.data?.message) {
             errorMessage = error.response.data.message;
+
         }
         throw new Error(errorMessage);
     }

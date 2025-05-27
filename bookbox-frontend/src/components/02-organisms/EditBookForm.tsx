@@ -6,6 +6,7 @@ import { Book, BookStatus, bookStatusToString, stringToBookStatus } from '@/type
 import FilePicker from '../00-atoms/FilePicker';
 import { getUser } from '@/services/authService';
 import { useBooks } from '@/context/BookContext';
+import { toast } from 'react-toastify';
 
 interface EditBookFormProps {
   onBookUpdated?: () => void;
@@ -67,10 +68,12 @@ const EditBookForm: React.FC<EditBookFormProps> = ({ onBookUpdated }) => {
 
       try {
         await updateBook(modifiedBook, updatedBook?._id || "");
-        setSuccessMessage("Book modified successfully!");
+        
+        //setSuccessMessage("Book modified successfully!");
         setTimeout(() => setSuccessMessage(""), 3000);
         if (onBookUpdated) onBookUpdated();
       } catch (error) {
+        toast.error("Failed to update book:", error)
         console.error("Failed to update book:", error);
       }
     }
