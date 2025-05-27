@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useBooks } from "@/context/BookContext";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
+import { getToken } from "@/utils/token";
 
 const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,9 @@ const HomePage: React.FC = () => {
   }, 500);
 
   useEffect(() => {
-    if (!user) {
-            router.push('/login');
-            return;
+    if (!getToken()) {
+      router.push('/login');
+      return;
     }
     debouncedFetchBooks(currentParams);
   }, [currentParams.query, currentParams.limit, currentParams.page, user?._id, refetchTrigger]);
