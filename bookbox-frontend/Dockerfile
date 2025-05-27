@@ -1,12 +1,15 @@
 ARG NODE_VERSION=23.10.0
 ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 # ----------- Building stage
 FROM node:${NODE_VERSION}-alpine as builder
 # Additional dependencies
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 # Copy package and package-lock
 COPY package*.json ./
 # Install all libraries to build the project 
