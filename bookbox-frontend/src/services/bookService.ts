@@ -59,7 +59,7 @@ export const getBook = async (bookID: string): Promise<Book> => {
     } catch (error) {
         console.error("Error fetching the book: ", error);
         let errorMessage = 'Error fetchingg the book';
-       
+
         if (error instanceof AxiosError && error.response?.data?.message) {
             errorMessage = error.response.data.message;
         }
@@ -85,10 +85,10 @@ export const updateBook = async (book: BookCU, id: string): Promise<BookUpdateRe
         const response = await api.put<BookUpdateResponse>(`${BOOKS_URL}/${id}`, book);
         toast.success("Book updated successfully");
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error updating book: ", error);
         let errorMessage = 'Error updating book';
-        if(error.response.status === 413){
+        if (error.response.status === 413) {
             toast.error("Image too big!");
         }
         else {

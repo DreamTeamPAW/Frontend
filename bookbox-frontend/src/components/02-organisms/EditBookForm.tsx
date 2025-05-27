@@ -68,11 +68,11 @@ const EditBookForm: React.FC<EditBookFormProps> = ({ onBookUpdated }) => {
 
       try {
         await updateBook(modifiedBook, updatedBook?._id || "");
-        
+
         //setSuccessMessage("Book modified successfully!");
         setTimeout(() => setSuccessMessage(""), 3000);
         if (onBookUpdated) onBookUpdated();
-      } catch (error) {
+      } catch (error: any) {
         toast.error("Failed to update book:", error)
         console.error("Failed to update book:", error);
       }
