@@ -4,6 +4,7 @@ import HomepageTemplate from "@/components/03-templates/HomepageTemplate";
 import { useAuth } from "@/context/AuthContext";
 import { useBooks } from "@/context/BookContext";
 import { useDebouncedCallback } from "use-debounce";
+import { useRouter } from "next/navigation";
 
 const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +13,7 @@ const HomePage: React.FC = () => {
   const { fetchBooks } = useBooks();
   const { currentParams } = useBooks();
 
-
+  const router = useRouter();
   const debouncedFetchBooks = useDebouncedCallback((params) => {
     setLoading(true);
     fetchBooks(params)
@@ -21,7 +22,10 @@ const HomePage: React.FC = () => {
   }, 500);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+            router.push('/login');
+            return;
+    }
     debouncedFetchBooks(currentParams);
   }, [currentParams.query, currentParams.limit, currentParams.page, user?._id, refetchTrigger]);
 

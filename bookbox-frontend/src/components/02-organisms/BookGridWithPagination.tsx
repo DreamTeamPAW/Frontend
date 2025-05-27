@@ -28,7 +28,7 @@ const BookGridWithPagination: React.FC<Props> = ({
         style={{ gridTemplateColumns: `repeat(auto-fill, ${BOOK_CARD_WIDTH}px)` }}
       >
         {loading ? (
-          <div className="col-span-3 text-center">Loading...</div>
+          <div className="col-span-5 text-center">Loading...</div>
         ) : books?.books.length === 0 ? (
           <div className="col-span-3 text-center text-gray-500">
             No books found.

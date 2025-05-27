@@ -64,19 +64,24 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onAdd }) => {
         dateAdded: new Date().toISOString(),
       };
       try {
-        await addBook(newBook);
-        setTitle("");
-        setAuthor("");
-        setStatus(BookStatus.UNREAD);
-        setCoverUrl(DEFAULT_BASE64_IMAGE);
-        setFile(null);
-        if (fileRef.current) fileRef.current.value = "";
-        onAdd();
-      } catch (error) {
-        console.error("Failed to add book:", error);
+      await addBook(newBook);
+      setTitle("");
+      setAuthor("");
+      setStatus(BookStatus.UNREAD);
+      setCoverUrl(DEFAULT_BASE64_IMAGE);
+      setFile(null);
+      if (fileRef.current) fileRef.current.value = "";
+      onAdd();
+    } catch (error: any) {
+      if (error?.response?.status === 413) {
+        toast.error("File is too large. Please choose a smaller file.");
+      } else {
+        toast.error("Failed to add book. Please try again.");
       }
+      console.error("Failed to add book:", error);
     }
-  };
+  }
+};
   return (
     <div className="flex">
       <img

@@ -37,6 +37,7 @@ type BookContextType = {
 
 const BookContext = createContext<BookContextType | undefined>(undefined);
 
+
 export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [books, setBooks] = useState<BookList | null>(null);
@@ -51,11 +52,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [updatedBook, setUpdatedBook] = useState<Book | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-    useEffect(() => {
-        currentParams.userId = getIDfromToken();
-        fetchBooks(currentParams);
-    }, []);
+ 
 
     const fetchBooks = async (params: PaginationParams = currentParams) => {
         try {
@@ -82,10 +79,11 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             await addBookService(book);
             fetchBooks(currentParams);
-            toast.success("Book added successfully");
+            toast.success("Book added successfully");         
         } catch (error) {
             setError("Error adding a book");
             console.error("Error adding a book: ", error);
+            throw error;
         }
     }
 
@@ -93,7 +91,6 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             const result = await updateBookService(book, id);
             fetchBooks(currentParams);
-            toast.success("Book updated successfully");
             setSelectedBook(result.book);
             setUpdatedBook(null);
         } catch (error) {
@@ -111,6 +108,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         } catch (error) {
             setError("Error updating a book");
             console.error("Error updating a book: ", error);
+            toast.error("Error updating a book!");
         }
 
     }
