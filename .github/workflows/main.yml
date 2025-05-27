@@ -17,8 +17,6 @@ on:
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
-    env:
-      NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -53,6 +51,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
