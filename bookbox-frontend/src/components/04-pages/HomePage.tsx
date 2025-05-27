@@ -1,15 +1,39 @@
-import { tertiaryTextLabelStyle } from "@/styles/classes";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+"use client";
+import React, { useEffect, useState } from "react";
+import HomepageTemplate from "@/components/03-templates/HomepageTemplate";
+import { useAuth } from "@/context/AuthContext";
+import { useBooks } from "@/context/BookContext";
+import { useDebouncedCallback } from "use-debounce";
+import { useRouter } from "next/navigation";
 
+const HomePage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [refetchTrigger] = useState(0);
+  const { user } = useAuth();
+  const { fetchBooks } = useBooks();
+  const { currentParams } = useBooks();
 
-  const HomePage: React.FC = () => {
-    return (
-        <div className="min-h-screen flex items-center justify-center">
-            <Link href="/login" className={`${tertiaryTextLabelStyle} pl-1`}>/login</Link>
-            <Link href="/register" className={`${tertiaryTextLabelStyle} pl-1`}>/register</Link>
-        </div>
-    );
-  };
+  const router = useRouter();
+  const debouncedFetchBooks = useDebouncedCallback((params) => {
+    setLoading(true);
+    fetchBooks(params)
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, 500);
+
+  useEffect(() => {
+    if (!user) {
+            router.push('/login');
+            return;
+    }
+    debouncedFetchBooks(currentParams);
+  }, [currentParams.query, currentParams.limit, currentParams.page, user?._id, refetchTrigger]);
+
+  return (
+    <HomepageTemplate
+      loading={loading}
+    />
+  );
+};
 
 export default HomePage;

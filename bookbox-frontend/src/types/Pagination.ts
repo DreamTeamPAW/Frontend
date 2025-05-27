@@ -15,4 +15,11 @@ export interface UserPagination {
 export interface PaginationParams {
 	page: number;
 	limit: number;
+	query: string;
+	userId?: string;
+}
+
+export interface UserPaginationParams {
+	page: number;
+	limit: number;
 }

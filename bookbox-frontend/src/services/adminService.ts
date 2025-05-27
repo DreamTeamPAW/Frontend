@@ -2,11 +2,11 @@ import api from './api';
 import { AxiosError } from 'axios';
 import { UserList } from '../types/User';
 import { USERS_URL } from './constants';
-import { PaginationParams } from '@/types/Pagination';
+import { UserPaginationParams } from '@/types/Pagination';
 
 const buildUserUrl = (id: string) => `${USERS_URL}/${id}`
 
-export const getUsers = async (params: PaginationParams): Promise<UserList> => {
+export const getUsers = async (params: UserPaginationParams): Promise<UserList> => {
     try {
         const response = await api.get<UserList>(USERS_URL, { params: params });
         return response.data;
