@@ -13,7 +13,6 @@ import { DEFAULT_LIMIT, INITIAL_PAGE } from '@/services/constants';
 import { PaginationParams } from '@/types/Pagination';
 import { toast } from 'react-toastify';
 import { getIDfromToken } from '@/utils/token';
-import { useRouter } from 'next/navigation';
 
 
 type BookContextType = {
@@ -53,19 +52,7 @@ export const BooksProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [updatedBook, setUpdatedBook] = useState<Book | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-    const router = useRouter();
-    
-  
-    useEffect(() => {
-          try{
-            currentParams.userId = getIDfromToken();
-            fetchBooks(currentParams);
-          } catch(error){
-            router.push('/login');
-          }
-    }, []);
-    
+ 
 
     const fetchBooks = async (params: PaginationParams = currentParams) => {
         try {
